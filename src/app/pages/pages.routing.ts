@@ -5,6 +5,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { UsersComponent } from './users/users.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 const routes: Routes = [    
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
       {path: '', component:DashboardComponent},
       {path: 'administration', component: AdministrationComponent},
       {path: 'ususers', component: UsersComponent},
-      {path: '', redirectTo:'/nombreApp', pathMatch:'full'}
+      {path: 'account-settings', component: AccountSettingsComponent}
     ]
   },
 ];
