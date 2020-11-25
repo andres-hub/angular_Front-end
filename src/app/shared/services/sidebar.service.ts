@@ -11,9 +11,9 @@ export class SidebarService {
     titulo:'principal',
     icono:  'mdi mdi-gauge',
     submenu:[
-      {titulo: 'Main', url: '/'},
+      {titulo: 'Main', url: ''},
       {titulo: 'Administracion', url: 'administration'},
-      {titulo: 'Usuarios', url: 'ususers'}
+      {titulo: 'Usuarios', url: 'users'}
     ]
   }
   ];

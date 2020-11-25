@@ -9,12 +9,13 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 
 const routes: Routes = [    
   {
+    // TODO: Poner esto como variable global 
     path:'nombreApp', component: PagesComponent,
     children:[
-      {path: '', component:DashboardComponent},
-      {path: 'administration', component: AdministrationComponent},
-      {path: 'ususers', component: UsersComponent},
-      {path: 'account-settings', component: AccountSettingsComponent}
+      {path: '', component:DashboardComponent, data: {titulo: 'Home'}},
+      {path: 'administration', component: AdministrationComponent, data: {titulo: 'Administración'}},
+      {path: 'users', component: UsersComponent, data: {titulo: 'Usuarios'}},
+      {path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Configuraciones'}}
     ]
   },
 ];
