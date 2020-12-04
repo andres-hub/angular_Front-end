@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule} from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -9,6 +10,7 @@ import { AdministrationComponent } from './administration/administration.compone
 import { UsersComponent } from './users/users.component';
 import { PagesComponent } from './pages.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     AdministrationComponent,
     UsersComponent,
     PagesComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    PerfilComponent
   ],
   exports:[
     DashboardComponent,
@@ -28,7 +31,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 

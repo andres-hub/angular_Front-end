@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { UsersComponent } from './users/users.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes = [    
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
       {path: '', component:DashboardComponent, data: {titulo: 'Home'}},
       {path: 'administration', component: AdministrationComponent, data: {titulo: 'Administración'}},
       {path: 'users', component: UsersComponent, data: {titulo: 'Usuarios'}},
-      {path: 'settings', component: AccountSettingsComponent, data: {titulo: 'Configuraciones'}}
+      {path: 'settings', component: AccountSettingsComponent, data: {titulo: 'Configuraciones'}},
+      {path: 'perfil', component: PerfilComponent, data: {titulo: 'Mi perfil'}}
     ]
   },
 ];
