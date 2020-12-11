@@ -9,9 +9,10 @@ export class Usuario {
         public uid:string,
         public email:string,
         public nombre:string,
-        public role?:string,
+        public estado: string,
         public img?:string,
-        public google?:boolean
+        public google?:boolean,
+        public role?:string
     ){}
 
     get imagenUrl(){
@@ -23,5 +24,5 @@ export class Usuario {
             return `${base_url}/upload/usuarios/no-image.png`;
         }
     }
-
+   
 }

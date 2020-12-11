@@ -18,23 +18,42 @@
                         <li><a routerLinkActive="active" routerLink="./perfil">Mi perfil</a></li>
                         <li><a href="javascript:void()">My Balance</a></li>
                         <li><a href="javascript:void()">Inbox</a></li>
-                        <li><a routerLinkActive="active" routerLink="settings">Configuraciones</a></li>
-                        <li><a routerLink="/login">Slir</a></li>
+                        <li><a routerLinkActive="active" routerLink="settings">Configurar tema</a></li>
+                        <li><a routerLink="/login">Salir</a></li>
                     </ul>
                 </li>
+
                 <li class="nav-devider"></li>
+
+                <li class="sidebar-item">                    
+                    <a [routerLink]="''" class="waves-effect waves-dark" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >
+                        <i class="fa fa-home"></i>
+                            <span class="hide-menu">
+                                Home
+                            </span>
+                    </a>
+                </li>
                
-                <li *ngFor="let item of menuItems"> 
-                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-                        <i class="mdi mdi-gauge"></i>
+                <li *ngFor="let item of menuItems" class="sidebar-item"> 
+                  
+                    <a *ngIf="item.linea" [routerLink]="item.submenu[0].url" class="waves-effect waves-dark" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i [class]="item.icono"></i>
+                            <span class="hide-menu">
+                                {{item.titulo}}
+                            </span>
+                    </a>
+                    
+ 
+                    <a *ngIf="!item.linea" class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                        <i [class]="item.icono"></i>
                             <span class="hide-menu">
                                 {{item.titulo}} 
                                 <span class="label label-rouded label-themecolor pull-right">
                                     {{item.submenu.length}}
                                 </span>
                             </span>
-                        </a>
-                    <ul aria-expanded="false" class="collapse">
+                    </a>
+                    <ul *ngIf="!item.linea" aria-expanded="false" class="collapse">
                         <li *ngFor="let subItem of item.submenu">
                             <a [routerLink]="subItem.url" routerLinkActive="active" 
                             [routerLinkActiveOptions]="{exact: true}">
@@ -42,6 +61,9 @@
                             </a>
                         </li>                        
                     </ul>
+
+
+
                 </li>
    
             </ul>

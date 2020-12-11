@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { environment } from '../../../environments/environment.prod';
 import { LoginForm } from '../interfaces/login-form.interfase';
+import { CargarUsuarios } from '../../pages/interfaces/cargar-usuarios-interface';
 
 import { Usuario } from '../models/usuario.model';
 import { ActualizarUsuarioForm } from '../../pages/interfaces/actualizar-usuario-form.interfase';
@@ -30,6 +31,35 @@ export class UsuarioService {
 
   get token(): string{
     return localStorage.getItem('token') || '';
+  }
+
+  get headers(){
+
+    return {
+      headers:{
+        'x-token': this.token
+      }
+    }
+
+  }
+
+  get uid():string{
+    return this.usuario.uid;
+  }
+
+  private convertirUsuarios(resp: any[]): Usuario[]{
+
+    return resp.map(
+      usuario => new Usuario(
+          usuario.uid,
+          usuario.email,
+          usuario.nombre,
+          usuario.estado,
+          usuario.img,
+          usuario.google,
+          usuario.role
+        )
+      );
   }
 
   googleInit(){
@@ -66,12 +96,10 @@ export class UsuarioService {
     })
     .pipe(
       map((resp: any) =>{
-
-        const {email, google, nombre, role, img = '', uid } = resp.usuario;
-        this.usuario = new Usuario(uid,email,nombre,role,img, google);
+        const {email, estado, google, nombre, role, img = '', uid } = resp.usuario;
+        this.usuario = new Usuario(uid,email,nombre, estado,img, google, role);
         localStorage.setItem('token', resp.token);
-        return true
-
+        return true;
       }),
       catchError(error => of(false))
     );
@@ -115,6 +143,59 @@ export class UsuarioService {
       })
     );
 
+  }
+
+  cargarUsuarios(desde:Number = 0){
+
+    const url = `${base_url}/usuarios?desde=${ desde }`;
+    return this.http.get<CargarUsuarios>(url, this.headers )
+                .pipe(
+                  map(resp =>{
+
+                    const usuarios = this.convertirUsuarios(resp.usuarios);
+
+                    return {
+                      total: resp.total,
+                      usuarios
+                    };
+                  })
+                );
+
+
+
+  }
+
+  buscar(termino: string){
+
+    const url = `${base_url}/usuarios/buscar/${termino}`;
+
+    return this.http.get<CargarUsuarios>(url, this.headers)
+                .pipe(
+                  map((resp: any) =>{
+
+                    const usuarios = this.convertirUsuarios(resp.usuarios);
+
+                    return {
+                      total: resp.total,
+                      usuarios
+                    };
+
+                  })
+                )
+
+  }
+
+  cambiarEstado(usuario: Usuario){
+
+    const url = `${base_url}/usuarios/${usuario.uid}`;
+    return this.http.delete(url, this.headers);
+
+  }
+
+  actualizarRol(ussuario:Usuario){
+    return this.http.put(`${base_url}/usuarios/role/${ussuario.uid}`, ussuario,{
+      headers:{ 'x-token': this.token }
+    })
   }
   
 }

@@ -8,14 +8,23 @@ export class SidebarService {
 
   menu: any[] = [{
 
-    titulo:'principal',
-    icono:  'mdi mdi-gauge',
-    submenu:[
-      {titulo: 'Main', url: ''},
+    titulo:'Administración',
+    icono:  'mdi mdi-account-settings-variant',
+    submenu:[  
       {titulo: 'Administracion', url: 'administration'},
       {titulo: 'Usuarios', url: 'users'}
-    ]
+    ],
+    linea: false
+  },
+  {
+    titulo:'Gastos',
+    icono:  'fa fa-money',
+    submenu:[
+      {titulo: 'Main', url: 'noPagina'}
+    ],
+    linea: true
   }
+
   ];
 
   constructor() { }
