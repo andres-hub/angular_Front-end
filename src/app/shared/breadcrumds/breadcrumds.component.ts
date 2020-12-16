@@ -12,12 +12,15 @@ import {filter, map} from 'rxjs/operators';
 export class BreadcrumdsComponent implements OnDestroy {
 
   public titulo: string;
+  public rutas: string[] = [];
   public tituloSubs$: Subscription;
 
   constructor( private router: Router ) { 
     this.tituloSubs$ = this.getArgumentosRuta()
-                              .subscribe(({titulo}) => {
+                              .subscribe(({titulo, rutas}) => {
                                 this.titulo = titulo;
+                                this.rutas = rutas;
+                                console.log(rutas);
                                 // TODO: Poner el nombre de la app
                                 document.title = `nombreApp - ${titulo}`;
                               });

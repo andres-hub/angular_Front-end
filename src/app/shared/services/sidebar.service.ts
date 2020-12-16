@@ -11,7 +11,7 @@ export class SidebarService {
     titulo:'Administración',
     icono:  'mdi mdi-account-settings-variant',
     submenu:[  
-      {titulo: 'Administracion', url: 'administration'},
+      {titulo: 'Construir menú', url: 'modulos', rutas:['Administración']},
       {titulo: 'Usuarios', url: 'users'}
     ],
     linea: false

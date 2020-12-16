@@ -1,4 +1,3 @@
-import { formatCurrency } from '@angular/common'
 import { environment } from '../../../environments/environment';
 
 const base_url = environment.base_url;

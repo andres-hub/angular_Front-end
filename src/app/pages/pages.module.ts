@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import {RouterModule} from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
+//Modulos
+import { ComponentsModule } from '../components/components.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -12,6 +14,14 @@ import { PagesComponent } from './pages.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PerfilComponent } from './perfil/perfil.component';
 
+import { ModulosComponent } from './modulos/modulos.component';
+import { ModuloComponent } from './modulos/modulo/modulo.component';
+import { ListarModulosComponent } from './modulos/listar-modulos/listar-modulos.component';
+
+import { EntidadesComponent } from './entidades/entidades.component';
+import { EntidadComponent } from './entidades/entidad/entidad.component';
+import { ListarEntidadesComponent } from './entidades/listar-entidades/listar-entidades.component';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -19,7 +29,13 @@ import { PerfilComponent } from './perfil/perfil.component';
     UsersComponent,
     PagesComponent,
     AccountSettingsComponent,
-    PerfilComponent
+    PerfilComponent,
+    ModulosComponent,
+    ListarModulosComponent,
+    ModuloComponent,
+    EntidadesComponent,
+    EntidadComponent,
+    ListarEntidadesComponent
   ],
   exports:[
     DashboardComponent,
@@ -33,6 +49,7 @@ import { PerfilComponent } from './perfil/perfil.component';
     FormsModule,
     SharedModule,
     RouterModule,
+    ComponentsModule,
     ReactiveFormsModule
   ]
 })

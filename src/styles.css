@@ -21,3 +21,21 @@
     width: 35px;
     border-radius: 100%;
 }
+
+.oculto {
+    display: none;
+}
+
+.fondo-modal-imagen{
+    background-color: rgba(0, 0, 0, 0.4);
+    left: 0px;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 9999;  
+}
+
+.w500{
+    height: 50px;
+}

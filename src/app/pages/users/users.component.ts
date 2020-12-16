@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import Swal from 'sweetalert2';
 
 import { Usuario } from 'src/app/auth/models/usuario.model';
+
 import { UsuarioService } from '../../auth/services/usuario.service';
+import { LoadingService } from '../../components/services/loading.service';
 
 @Component({
   selector: 'app-users',
@@ -20,25 +22,36 @@ export class UsersComponent implements OnInit {
   public viewDesde: number = 1;
   public hasta: number = 10;
   public intervalo:number = 10;
-  public cargando: boolean = true;
   public Sigiente: boolean = true;
   public Anterior: boolean = false;
 
-  constructor( private usuarioService: UsuarioService) { }
+  constructor( 
+    private usuarioService: UsuarioService,
+    public loadingService: LoadingService
+    ) { }
 
   ngOnInit(): void {
     this.cargarUsuarios();
   }
 
   cargarUsuarios(){
-    this.cargando = true;
+    this.loadingService.mostrarLoading();
     this.usuarioService.cargarUsuarios(this.desde)
     .subscribe(({total, usuarios}) => {
       this.totalUsuarios = total;
       this.usuarios = usuarios;
       this.usuariosTem = usuarios;
       this.totalUsuariosTem = total;
-      this.cargando = false;  
+      this.loadingService.ocultarLoading();
+
+
+      if(this.hasta >= this.totalUsuarios){
+        this.Sigiente = false;
+        this.hasta = this.totalUsuarios;
+      }else{
+        this.Sigiente = true;
+      }
+
     });
 
   }
@@ -79,11 +92,12 @@ export class UsersComponent implements OnInit {
        return;
     }
 
+    this.loadingService.mostrarLoading();
     this.usuarioService.buscar(termino)
         .subscribe(({total, usuarios}) => {
           this.totalUsuarios = total;
           this.usuarios = usuarios;
-          this.cargando = false;
+          this.loadingService.ocultarLoading();
           
         }
         ,(err)=>{
@@ -116,8 +130,11 @@ export class UsersComponent implements OnInit {
       
       if (result.isConfirmed) {
 
+        this.loadingService.mostrarLoading();
+
         this.usuarioService.cambiarEstado(usuario)
             .subscribe((resp:any) =>{
+              this.loadingService.ocultarLoading();
               this.cargarUsuarios();
               estado = (resp.usuario.estado)? "Activado": "Inactivado";
               Swal.fire('Activado', `${usuario.nombre} ${estado} con éxito`, 'success');
@@ -137,11 +154,11 @@ export class UsersComponent implements OnInit {
 
   cambiarRole( usuario:Usuario ) {
      
-    this.cargando = true;
+    this.loadingService.mostrarLoading();
 
     this.usuarioService.actualizarRol( usuario )
       .subscribe( resp => {
-        this.cargando = false;
+        this.loadingService.ocultarLoading();
       }
       ,(err)=>{
         Swal.fire({
@@ -152,6 +169,5 @@ export class UsersComponent implements OnInit {
         }); 
       });
   }
-
 
 }
