@@ -14,6 +14,9 @@ import { ListarModulosComponent } from './modulos/listar-modulos/listar-modulos.
 import { EntidadesComponent } from './entidades/entidades.component';
 import { ListarEntidadesComponent } from './entidades/listar-entidades/listar-entidades.component';
 import { EntidadComponent } from './entidades/entidad/entidad.component';
+import { ListarParametrosComponent } from './parametros/listar-parametros/listar-parametros.component';
+import { ParametroComponent } from './parametros/parametro/parametro.component';
+import { ParametrosComponent } from './parametros/parametros/parametros.component';
 
 const routes: Routes = [    
   {
@@ -38,6 +41,15 @@ const routes: Routes = [
               {path: 'entidad/:id', component:EntidadComponent, data: {titulo: 'modulo'}}
             ]
           }
+        ]
+      },
+      {
+        path: 'parametros',
+        component: ParametrosComponent, 
+        data:{titulo: 'Parametros'},
+        children:[
+          {path: '', component: ListarParametrosComponent, data: {tilulo: 'Listar Parametros'}},
+          {path: 'parametro/:id', component: ParametroComponent, data: {titulo: 'Parametro'}}
         ]
       },
       {path: 'users', component: UsersComponent, data: {titulo: 'Usuarios'}},

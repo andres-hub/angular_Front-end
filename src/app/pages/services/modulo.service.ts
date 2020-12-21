@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
 import { Modulo } from '../models/modulo.model';
 import { CargarModulos } from '../interfaces/cargar-modulos-interface';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 const base_url = environment.base_url;
 
@@ -42,6 +41,19 @@ export class ModuloService {
          modulo.icono
         )
       );
+  }
+
+  allModulos(){
+
+    const url = `${base_url}/modulos/all`;
+
+    return this.http.get(url,this.headers).pipe(
+      map((resp: any) =>{
+        const modulos = this.convertirModulos(resp.modulos);
+        return modulos
+      })
+    );
+
   }
 
   cargarModulos(desde:Number = 0){

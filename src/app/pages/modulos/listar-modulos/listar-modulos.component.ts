@@ -93,6 +93,9 @@ export class ListarModulosComponent implements OnInit {
     {
        this.modulos = this.modulosTem;
        this.totalRegistros = this.totalRegistrosTem;
+
+       this.loadingService.ocultarLoading();
+
        return;
     }
 

@@ -24,9 +24,9 @@ export class ModuloComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    public moduloService:ModuloService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    public moduloService:ModuloService,
     public loadingService: LoadingService
   ) { }
 
@@ -42,6 +42,8 @@ export class ModuloComponent implements OnInit {
   }
 
   cargarModulo(id: string){
+
+    this.loadingService.mostrarLoading();
 
     if(id === 'Nuevo'){
       this.loadingService.ocultarLoading();
@@ -108,8 +110,6 @@ export class ModuloComponent implements OnInit {
 
 
     }else{
-
-      console.log('paso');
 
       const data = { ...this.moduloForm.value};
 

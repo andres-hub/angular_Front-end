@@ -20,7 +20,7 @@ export class BreadcrumdsComponent implements OnDestroy {
                               .subscribe(({titulo, rutas}) => {
                                 this.titulo = titulo;
                                 this.rutas = rutas;
-                                console.log(rutas);
+                                
                                 // TODO: Poner el nombre de la app
                                 document.title = `nombreApp - ${titulo}`;
                               });

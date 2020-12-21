@@ -2,8 +2,8 @@
                 
     <div class="col-sm-12 col-md-5">
 
-        <h4 class="card-title">Total de entidades ({{ totalRegistros }})</h4>
-        <h6 class="card-subtitle">Modulos registrados</h6>
+        <h4 class="card-title">Total de parametros ({{ totalRegistros }})</h4>
+        <h6 class="card-subtitle">Parametros registrados</h6>
 
     </div>
 
@@ -16,7 +16,7 @@
 <div class="col">
     <div class="text-right">
         <a class="btn btn-primary"
-           routerLink="entidad/Nuevo">
+           routerLink="parametro/Nuevo">
             <i class="fa fa-plus"></i> 
             Nuevo
         </a>
@@ -34,27 +34,31 @@
                         Nombre
                     </th>
                     <th>
-                        Permisos
+                        Valor
                     </th>
-                    <th class="text-nowrap w100">
-                        Acciones
+                    <th>
+                        Estado
                     </th>
+                    <th class="text-nowrap w100">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let row of entidades">
+                <tr *ngFor="let parametro of parametros">
                     <td>
-                        {{row.nombre}}
-                    </td>  
-                    <td>{{ row.acciones }}</td> 
+                        {{parametro.nombre}}
+                    </td> 
+                    <td>
+                        {{parametro.valor}}
+                    </td> 
+                    <td>
+                        {{parametro.estado}}
+                    </td> 
                     <td class="text-nowrap text-center">   
 
-                        <a [routerLink]="['entidad', row._id ]" data-toggle="tooltip" data-original-title="Editar" 
+                        <a [routerLink]="['parametro', parametro._id ]" data-toggle="tooltip" data-original-title="Editar" 
                         > 
                             <i class="fa fa-edit text-inverse m-r-10"></i>
                         </a>
-                                   
-
                     </td>                           
                 </tr>
             </tbody>
@@ -83,3 +87,5 @@
 
     </div>
 </div>
+
+
