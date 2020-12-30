@@ -24,6 +24,10 @@ import { ListarEntidadesComponent } from './entidades/listar-entidades/listar-en
 import { ParametrosComponent } from './parametros/parametros/parametros.component';
 import { ListarParametrosComponent } from './parametros/listar-parametros/listar-parametros.component';
 import { ParametroComponent } from './parametros/parametro/parametro.component';
+import { RolesComponent } from './roles/roles.component';
+import { ListarRolesComponent } from './roles/listar-roles/listar-roles.component';
+import { RolComponent } from './roles/rol/rol.component';
+import { PermisosComponent } from './permisos/permisos.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { ParametroComponent } from './parametros/parametro/parametro.component';
     ListarEntidadesComponent,
     ParametrosComponent,
     ListarParametrosComponent,
-    ParametroComponent
+    ParametroComponent,
+    RolesComponent,
+    ListarRolesComponent,
+    RolComponent,
+    PermisosComponent
   ],
   exports:[
     DashboardComponent,

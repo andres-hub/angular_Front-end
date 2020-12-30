@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+
 import { Modulo } from '../../models/modulo.model';
 import { ModuloService } from '../../services/modulo.service';
 import { LoadingService } from '../../../components/services/loading.service';

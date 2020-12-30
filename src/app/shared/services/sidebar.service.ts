@@ -13,7 +13,8 @@ export class SidebarService {
     submenu:[  
       {titulo: 'Construir menú', url: 'modulos', rutas:['Administración']},
       {titulo: 'Parametros', url: 'parametros', rutas:['Administración']},
-      {titulo: 'Usuarios', url: 'users'}
+      {titulo: 'Usuarios', url: 'users'},
+      {titulo: 'Roles', url: 'roles'}
     ],
     linea: false
   },

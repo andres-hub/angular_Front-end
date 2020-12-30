@@ -10,6 +10,7 @@ import { EntidadesService } from '../../services/entidades.service';
 import { Entidad } from '../../models/entidad.model';
 import { Modulo } from '../../models/modulo.model';
 import { ModuloService } from '../../services/modulo.service';
+import { Accion } from '../../models/accion.model';
 
 @Component({
   selector: 'app-entidad',
@@ -23,7 +24,7 @@ export class EntidadComponent implements OnInit {
   public entidad: Entidad;
   private id: string;
   public modulos: Modulo [];
-  public acciones: string[] = [];
+  public acciones: Accion[] = [];
 
   constructor(
     public fb: FormBuilder,
@@ -116,7 +117,7 @@ export class EntidadComponent implements OnInit {
 
   agregarPermiso(){
     
-    this.acciones.push('');
+    this.acciones.push({alias: '', accion: ''});
 
   }
 
@@ -132,13 +133,9 @@ export class EntidadComponent implements OnInit {
 
     if(this.id){
 
-      console.log('object');
-
       const data: Entidad = { ...this.Form.value, _id: this.id };
 
       data.acciones = this.entidad.acciones; 
-
-      console.log(data);
 
       this.entidadesService.actualizarEntidad(data).subscribe((resp:any)=>{
 

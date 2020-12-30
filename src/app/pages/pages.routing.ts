@@ -17,6 +17,10 @@ import { EntidadComponent } from './entidades/entidad/entidad.component';
 import { ListarParametrosComponent } from './parametros/listar-parametros/listar-parametros.component';
 import { ParametroComponent } from './parametros/parametro/parametro.component';
 import { ParametrosComponent } from './parametros/parametros/parametros.component';
+import { RolesComponent } from './roles/roles.component';
+import { ListarRolesComponent } from './roles/listar-roles/listar-roles.component';
+import { RolComponent } from './roles/rol/rol.component';
+import { PermisosComponent } from './permisos/permisos.component';
 
 const routes: Routes = [    
   {
@@ -37,8 +41,8 @@ const routes: Routes = [
             component:EntidadesComponent, 
             data: {titulo: 'modulo'},
             children:[
-              {path: '', component:ListarEntidadesComponent, data: {titulo: 'modulo'}},
-              {path: 'entidad/:id', component:EntidadComponent, data: {titulo: 'modulo'}}
+              {path: '', component: ListarEntidadesComponent, data: {titulo: 'modulo'}},
+              {path: 'entidad/:id', component: EntidadComponent, data: {titulo: 'modulo'}}
             ]
           }
         ]
@@ -52,6 +56,16 @@ const routes: Routes = [
           {path: 'parametro/:id', component: ParametroComponent, data: {titulo: 'Parametro'}}
         ]
       },
+      {
+        path: 'roles', 
+        component: RolesComponent,
+        data: {titulo: 'Roles'},
+        children:[
+          {path: '', component: ListarRolesComponent, data: {titulo: 'roles'}},
+          {path: 'rol/:id', component: RolComponent, data: {titulo: 'rol'}}
+        ]
+      },
+      {path: 'permisos/:tipo/:id', component: PermisosComponent, data: {titulo: 'Permisos'}},
       {path: 'users', component: UsersComponent, data: {titulo: 'Usuarios'}},
       {path: 'settings', component: AccountSettingsComponent, data: {titulo: 'Configuraciones'}},
       {path: 'perfil', component: PerfilComponent, data: {titulo: 'Mi perfil'}}

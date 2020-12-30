@@ -1,3 +1,5 @@
+import { Accion } from './accion.model';
+
 export class Entidad {
 
     constructor(
@@ -5,6 +7,6 @@ export class Entidad {
         public moduloId: string,
         public nombre:string,
         public url: string,
-        public acciones:string[]
+        public acciones: Accion[]
     ){}
 }
