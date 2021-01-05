@@ -24,7 +24,7 @@
 
                                 <!-- Acciones -->
                                 <div *ngFor="let accion of entidad.acciones" class="col-md-4 text-center">
-                                    <input (change)="cambio(row.modulo._id, entidad._id, accion._id, $event)" type="checkbox" class="check" id="{{accion._id}}">
+                                    <input [checked]="accion.check" (change)="cambio(row.modulo._id, entidad._id, accion._id, $event)" type="checkbox" class="check" id="{{accion._id}}">
                                     <label for="{{accion._id}}">{{accion.alias}}</label>                                  
                                 </div>
                                 <!-- /Acciones -->

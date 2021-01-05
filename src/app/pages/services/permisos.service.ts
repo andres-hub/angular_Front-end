@@ -39,13 +39,22 @@ export class PermisosService {
       );
   }
 
-  cargarPermisos(id:string){
+  cargarAcciones(id:string){
 
-    const url = `${base_url}/permisos`;
+    const url = `${base_url}/permisos/acciones/${id}`;
     return this.http.get(url, this.headers ).pipe(
       map((resp: {ok:boolean, menu:Menu}) => resp.menu)
     );
                     
+  }
+
+  cargarPermisos(id: string){
+
+    const url = `${base_url}/permisos/${id}`;
+    return this.http.get(url, this.headers).pipe(
+      map((resp:{ok: boolean, permisos:Permiso[]})=> resp.permisos)  
+    );
+
   }
 
   asignarPermisos(id: string, permisos: Permiso[]){

@@ -35,16 +35,64 @@ export class PermisosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedRoute.params.subscribe(({ id, tipo })=> this.cargarPermisos(id, tipo));
+    this.activatedRoute.params.subscribe(({ id, tipo })=> this.cargarParametros(id, tipo));
 
   }
 
-  cargarPermisos(id:string, tipo: 'rol'| 'user'){
+  cargarParametros(id:string, tipo: 'rol'| 'user'){
 
     this.id = id;
 
+    this.cargarTipo(tipo);
+    
+    this.cargarAcciones();
+    
+    this.cargarPermisos();
+
+  }
+
+  cargarPermisos(){
+
     this.loadingService.mostrarLoading();
 
+    this.permisosService.cargarPermisos(this.id).subscribe((resp:Permiso[]) => {
+
+      this.permisos = resp;
+      this.loadingService.ocultarLoading();
+
+    },
+    (err)=>{
+      Swal.fire({
+        title: '¡Error!',
+        text: err.error.msg,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
+      return this.location.back();
+    });
+
+  }
+  
+  cargarAcciones() {
+
+    this.loadingService.mostrarLoading();
+
+    this.permisosService.cargarAcciones(this.id).subscribe((resp: any) => {
+      this.menu = resp;
+      this.loadingService.ocultarLoading();
+    },
+      (err) => {
+        Swal.fire({
+          title: '¡Error!',
+          text: err.error.msg,
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
+        return this.location.back();
+      });
+  }
+
+  cargarTipo(tipo: string) {
     switch (tipo) {
       case 'user':
         this.cargarUsuario();
@@ -61,21 +109,6 @@ export class PermisosComponent implements OnInit {
         });
         return this.location.back();
     }
-
-    this.permisosService.cargarPermisos(id).subscribe((resp: any)=>{
-      this.menu = resp;
-      this.loadingService.ocultarLoading();
-    },
-    (err)=>{
-      Swal.fire({
-        title: '¡Error!',
-        text: err.error.msg,
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      });
-      return this.location.back();
-    });
-
   }
 
   cargarUsuario(){
