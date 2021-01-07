@@ -5,6 +5,8 @@ import { Usuario } from 'src/app/auth/models/usuario.model';
 
 import { UsuarioService } from '../../auth/services/usuario.service';
 import { LoadingService } from '../../components/services/loading.service';
+import { RolesService } from '../services/roles.service';
+import { Rol } from '../models/rol.model';
 
 @Component({
   selector: 'app-users',
@@ -14,6 +16,7 @@ import { LoadingService } from '../../components/services/loading.service';
 })
 export class UsersComponent implements OnInit {
 
+  public roles: Rol[] = [];
   public totalUsuarios: number = 0;
   public totalUsuariosTem: number = 0;
   public usuarios: Usuario[]= [];
@@ -27,11 +30,13 @@ export class UsersComponent implements OnInit {
 
   constructor( 
     private usuarioService: UsuarioService,
-    public loadingService: LoadingService
+    public loadingService: LoadingService,
+    private rolesService: RolesService
     ) { }
 
   ngOnInit(): void {
     this.cargarUsuarios();
+    this.cargarRoles();
   }
 
   cargarUsuarios(){
@@ -168,6 +173,25 @@ export class UsersComponent implements OnInit {
           confirmButtonText: 'Ok'
         }); 
       });
+  }
+
+  cargarRoles(){
+
+    this.loadingService.mostrarLoading();
+    
+    this.rolesService.cargarRolesAll().subscribe(({roles})=>{
+      this.roles = roles;
+      this.loadingService.ocultarLoading();
+    },
+    (err)=>{
+      Swal.fire({
+        title: '¡Error!',
+        text: err.error.msg,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });  
+    })
+
   }
 
 }

@@ -2,6 +2,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 
 import { AuthGuard } from '../guards/auth.guard';
+import { RutasGuard } from '../guards/rutas.guard';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -21,6 +22,7 @@ import { RolesComponent } from './roles/roles.component';
 import { ListarRolesComponent } from './roles/listar-roles/listar-roles.component';
 import { RolComponent } from './roles/rol/rol.component';
 import { PermisosComponent } from './permisos/permisos.component';
+import { from } from 'rxjs';
 
 const routes: Routes = [    
   {
@@ -28,21 +30,23 @@ const routes: Routes = [
     path:'nombreApp', component: PagesComponent,
     canActivate:[AuthGuard],
     children:[
-      {path: '', component:DashboardComponent, data: {titulo: 'Home'}},
+      {path: '', component:DashboardComponent, canActivate:[AuthGuard], data: {titulo: 'Home'}},
       {
         path: 'modulos', 
-        component:ModulosComponent, 
+        component:ModulosComponent,
+        canActivate:[AuthGuard, RutasGuard], 
         data: {titulo: 'Construir menú'},
         children:[
-          {path: '', component:ListarModulosComponent, data: {titulo: 'modulo'}},
-          {path: 'modulo/:id', component:ModuloComponent, data: {titulo: 'modulo'}},
+          {path: '', component:ListarModulosComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'modulo'}},
+          {path: 'modulo/:id', component:ModuloComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'modulo'}},
           {
             path: 'entidades/:id', 
-            component:EntidadesComponent, 
+            component:EntidadesComponent,
+            canActivate:[AuthGuard, RutasGuard], 
             data: {titulo: 'modulo'},
             children:[
-              {path: '', component: ListarEntidadesComponent, data: {titulo: 'modulo'}},
-              {path: 'entidad/:id', component: EntidadComponent, data: {titulo: 'modulo'}}
+              {path: '', component: ListarEntidadesComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'modulo'}},
+              {path: 'entidad/:id', component: EntidadComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'modulo'}}
             ]
           }
         ]
@@ -50,25 +54,27 @@ const routes: Routes = [
       {
         path: 'parametros',
         component: ParametrosComponent, 
+        canActivate:[AuthGuard, RutasGuard],
         data:{titulo: 'Parametros'},
         children:[
-          {path: '', component: ListarParametrosComponent, data: {tilulo: 'Listar Parametros'}},
-          {path: 'parametro/:id', component: ParametroComponent, data: {titulo: 'Parametro'}}
+          {path: '', component: ListarParametrosComponent, canActivate:[AuthGuard, RutasGuard], data: {tilulo: 'Listar Parametros'}},
+          {path: 'parametro/:id', component: ParametroComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'Parametro'}}
         ]
       },
       {
         path: 'roles', 
         component: RolesComponent,
+        canActivate:[AuthGuard, RutasGuard],
         data: {titulo: 'Roles'},
         children:[
-          {path: '', component: ListarRolesComponent, data: {titulo: 'roles'}},
-          {path: 'rol/:id', component: RolComponent, data: {titulo: 'rol'}}
+          {path: '', component: ListarRolesComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'roles'}},
+          {path: 'rol/:id', component: RolComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'rol'}}
         ]
       },
-      {path: 'permisos/:tipo/:id', component: PermisosComponent, data: {titulo: 'Permisos'}},
-      {path: 'users', component: UsersComponent, data: {titulo: 'Usuarios'}},
-      {path: 'settings', component: AccountSettingsComponent, data: {titulo: 'Configuraciones'}},
-      {path: 'perfil', component: PerfilComponent, data: {titulo: 'Mi perfil'}}
+      {path: 'permisos/:tipo/:id', component: PermisosComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'Permisos'}},
+      {path: 'users', component: UsersComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'Usuarios'}},
+      {path: 'settings', component: AccountSettingsComponent, canActivate:[AuthGuard], data: {titulo: 'Configuraciones'}},
+      {path: 'perfil', component: PerfilComponent, canActivate:[AuthGuard], data: {titulo: 'Mi perfil'}}
     ]
   },
 ];

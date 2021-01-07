@@ -34,7 +34,7 @@
                     </a>
                 </li>
                
-                <li *ngFor="let item of menuItems" class="sidebar-item"> 
+                <li *ngFor="let item of sidebarService.menu" class="sidebar-item"> 
                   
                     <a *ngIf="item.linea" [routerLink]="item.submenu[0].url" class="waves-effect waves-dark" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                         <i [class]="item.icono"></i>

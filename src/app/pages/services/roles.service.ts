@@ -41,6 +41,21 @@ export class RolesService {
       );
   }
 
+  cargarRolesAll(desde:Number = 0){
+    const url = `${base_url}/roles/all`;
+    return this.http.get<CargarRoles>(url, this.headers )
+                .pipe(
+                  map(resp =>{
+
+                    const roles = this.convertirRoles(resp.roles);
+
+                    return {
+                      roles
+                    };
+                  })
+                );
+  }
+
   cargarRoles(desde:Number = 0){
     const url = `${base_url}/roles/?desde=${ desde }`;
     return this.http.get<CargarRoles>(url, this.headers )
