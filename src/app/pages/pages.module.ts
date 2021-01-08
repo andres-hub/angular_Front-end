@@ -28,6 +28,7 @@ import { RolesComponent } from './roles/roles.component';
 import { ListarRolesComponent } from './roles/listar-roles/listar-roles.component';
 import { RolComponent } from './roles/rol/rol.component';
 import { PermisosComponent } from './permisos/permisos.component';
+import { IngresosComponent } from './ingresos/ingresos.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { PermisosComponent } from './permisos/permisos.component';
     RolesComponent,
     ListarRolesComponent,
     RolComponent,
-    PermisosComponent
+    PermisosComponent,
+    IngresosComponent
   ],
   exports:[
     DashboardComponent,

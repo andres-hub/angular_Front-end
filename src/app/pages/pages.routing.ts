@@ -1,4 +1,4 @@
-import {Routes, RouterModule} from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import {NgModule} from '@angular/core';
 
 import { AuthGuard } from '../guards/auth.guard';
@@ -23,6 +23,7 @@ import { ListarRolesComponent } from './roles/listar-roles/listar-roles.componen
 import { RolComponent } from './roles/rol/rol.component';
 import { PermisosComponent } from './permisos/permisos.component';
 import { from } from 'rxjs';
+import { IngresosComponent } from './ingresos/ingresos.component';
 
 const routes: Routes = [    
   {
@@ -74,7 +75,11 @@ const routes: Routes = [
       {path: 'permisos/:tipo/:id', component: PermisosComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'Permisos'}},
       {path: 'users', component: UsersComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'Usuarios'}},
       {path: 'settings', component: AccountSettingsComponent, canActivate:[AuthGuard], data: {titulo: 'Configuraciones'}},
-      {path: 'perfil', component: PerfilComponent, canActivate:[AuthGuard], data: {titulo: 'Mi perfil'}}
+      {path: 'perfil', component: PerfilComponent, canActivate:[AuthGuard], data: {titulo: 'Mi perfil'}},
+
+      //negocio
+      {path:'ingresos', component: IngresosComponent, canActivate:[AuthGuard], data: {titulo: 'Ingresos'} }
+
     ]
   },
 ];
