@@ -20,7 +20,7 @@
 
     <div class="form-group m-t-20">
         <div class="col-xs-12">
-            <select class="form-control" formControlName="moduloId">
+            <select class="form-control" formControlName="modulo">
                 <option value="">Seleccione Modulo</option>
                 <option *ngFor="let modulo of modulos" [value]="modulo._id">
                     {{modulo.nombre}}
@@ -34,6 +34,7 @@
             <tr>
                 <th>Alias</th>
                 <th>Nombre</th>
+                <th>url</th>
                 <th class="text-nowrap w100">Aciones</th>
             </tr>
         </thead>
@@ -52,6 +53,13 @@
                     placeholder="Nombre" 
                     [(ngModel)]="acciones[i].accion" required
                     [ngModelOptions]="{standalone: true}"/>
+                </td>
+                <td>
+                    <input type="text"                     
+                    class="form-control"
+                    placeholder="Url"
+                    [(ngModel)]="acciones[i].url" required
+                    [ngModelOptions]="{standalone: true}">
                 </td>
                 <td class="text-nowrap text-center">
                     <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Eliminar"

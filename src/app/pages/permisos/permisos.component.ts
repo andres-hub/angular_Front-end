@@ -173,7 +173,7 @@ export class PermisosComponent implements OnInit {
 
       Swal.fire({
         title: 'Permisos asignados con éxito',
-        text: `Nombre del rol o persona.`,
+        text: `${this.nombre}`,
         icon: 'success',
         confirmButtonText: 'Ok'
       }).then((result) =>{

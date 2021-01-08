@@ -90,8 +90,6 @@ export class EntidadesService {
 
     const url = `${base_url}/entidades`;
 
-    console.log(entidad);
-
     return this.http.post(url, entidad, this.headers);
 
   }

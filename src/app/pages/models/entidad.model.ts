@@ -4,7 +4,7 @@ export class Entidad {
 
     constructor(
         public _id: string,
-        public moduloId: string,
+        public modulo: string,
         public nombre:string,
         public url: string,
         public acciones: Accion[]

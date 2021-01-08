@@ -44,7 +44,7 @@ export class EntidadComponent implements OnInit {
     this.Form = this.fb.group({
       nombre: ['', Validators.required],
       url:['',Validators.required],
-      moduloId:['', Validators.required]
+      modulo:['', Validators.required]
     });  
 
   }
@@ -71,12 +71,12 @@ export class EntidadComponent implements OnInit {
         return this.location.back();
       }
 
-      const {nombre,moduloId, url} = entidad;
+      const {nombre,modulo, url} = entidad;
 
       this.entidad = entidad;
       this.acciones = entidad.acciones;
 
-      this.Form.setValue({nombre, moduloId, url});
+      this.Form.setValue({nombre, modulo, url});
 
       this.loadingService.ocultarLoading();
 
@@ -117,7 +117,7 @@ export class EntidadComponent implements OnInit {
 
   agregarPermiso(){
     
-    this.acciones.push({alias: '', accion: ''});
+    this.acciones.push({alias: '', accion: '', url: ''});
 
   }
 
@@ -167,6 +167,7 @@ export class EntidadComponent implements OnInit {
       const data: Entidad = { ...this.Form.value};
 
       data.acciones = this.acciones;
+      console.log("object");
 
       this.entidadesService.crearEntidad(data).subscribe((resp: any)=>{
 
@@ -189,6 +190,7 @@ export class EntidadComponent implements OnInit {
           icon: 'error',
           confirmButtonText: 'Ok'
         });
+        
         this.loadingService.ocultarLoading();
       }
       )
