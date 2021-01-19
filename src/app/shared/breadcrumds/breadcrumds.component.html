@@ -8,9 +8,11 @@
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="javascript:void(0)">Home</a>
+                <a [routerLink]="'/'">{{nombreAppi}}</a>
             </li>
-            <li *ngFor="let ruta of rutas" class="breadcrumb-item">{{ruta}}</li>
+            <li *ngFor="let row of ruta" class="breadcrumb-item">
+                <a [routerLink]="row.url" >{{row}}</a>
+            </li>
             <li class="breadcrumb-item active">{{titulo}}</li>
         </ol>
     </div>
