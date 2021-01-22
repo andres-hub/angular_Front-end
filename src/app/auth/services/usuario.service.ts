@@ -65,7 +65,7 @@ export class UsuarioService {
 
   googleInit(){
 
-    return new Promise(resolve =>{
+    return new Promise<void>(resolve =>{
 
       gapi.load('auth2', () => {
         // Retrieve the singleton for the GoogleAuth library and set up the client.
