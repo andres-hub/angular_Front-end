@@ -44,7 +44,7 @@ const routes: Routes = [
             path: 'modulo/:id', component:ModuloComponent, 
             canActivate:[AuthGuard, RutasGuard], 
             data: {
-              ruta:['Construir Menú'], 
+              rutas:[{alias:'Construir Menú', url:'modulos'}], 
               titulo: 'Modulo'
             }
           },
@@ -60,7 +60,7 @@ const routes: Routes = [
                 canActivate:[AuthGuard, RutasGuard], 
                 data: {
                   titulo: 'Listar Entidades',
-                  ruta:['Construir Menú']
+                  rutas:[{alias:'Construir Menú', url:'modulos'}]
                 }
               },
               {
@@ -69,7 +69,7 @@ const routes: Routes = [
                 canActivate:[AuthGuard, RutasGuard], 
                 data: {
                   titulo: 'Entidad',
-                  ruta:['Construir Menú', 'Listar Entidades']
+                  rutas:[{alias:'Construir Menú', url:'modulos'},{alias:'Listar Entidades', url:'modulos/entidades/:id'}]
                 }
               }
             ]
@@ -83,7 +83,7 @@ const routes: Routes = [
         data:{titulo: 'Parametros'},
         children:[
           {path: '', component: ListarParametrosComponent, canActivate:[AuthGuard, RutasGuard], data: {tilulo: 'Listar Parametros'}},
-          {path: 'parametro/:id', component: ParametroComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'Parametro'}}
+          {path: 'parametro/:id', component: ParametroComponent, canActivate:[AuthGuard, RutasGuard], data: {rutas:[{alias:'Listar Parametros', url:'parametros'}],titulo: 'Parametro'}}
         ]
       },
       {
@@ -93,7 +93,7 @@ const routes: Routes = [
         data: {titulo: 'Roles'},
         children:[
           {path: '', component: ListarRolesComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'Listar Roles'}},
-          {path: 'rol/:id', component: RolComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'Rol'}}
+          {path: 'rol/:id', component: RolComponent, canActivate:[AuthGuard, RutasGuard], data: {rutas:[{alias:'Listar Roles', url:'roles'}], titulo: 'Rol'}}
         ]
       },
       {path: 'permisos/:tipo/:id', component: PermisosComponent, canActivate:[AuthGuard, RutasGuard], data: {titulo: 'Permisos'}},

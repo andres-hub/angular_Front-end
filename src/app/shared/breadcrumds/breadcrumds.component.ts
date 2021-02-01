@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy} from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {filter, map} from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment.prod';
-import { Miga } from '../interfaces/miga-interfase';
+import { Miga } from '../../pages/interfaces/miga-interfase';
 
 @Component({
   selector: 'app-breadcrumds',
@@ -13,22 +13,16 @@ import { Miga } from '../interfaces/miga-interfase';
   ]
 })
 export class BreadcrumdsComponent implements OnDestroy {
-
+   
   public titulo: string;
-  public ruta: [] = [];
+  public rutas: Miga[] = [];
   public tituloSubs$: Subscription;
   public nombreAppi: string = environment.nombreApi;
 
   constructor( private router: Router ) { 
     this.tituloSubs$ = this.getArgumentosRuta()
                               .subscribe((res: any) => {
-                                this.titulo =res.titulo;
-                                console.log(res);
-                                // console.log(ruta);
-                                this.ruta = res.ruta;
-                                
-                                // TODO: Poner el nombre de la app
-                                document.title = `nombreApp - ${res.titulo}`;
+                               this.miga(res);
                               });
   }
   
@@ -38,14 +32,36 @@ export class BreadcrumdsComponent implements OnDestroy {
 
   getArgumentosRuta(){
 
-    console.log(this.router);
+    console.log(this.router.events);
 
     return this.router.events
       .pipe(
         filter(event =>  event instanceof ActivationEnd),
         filter((event: ActivationEnd) =>  event.snapshot.firstChild === null),
-        map((event: ActivationEnd) =>  event.snapshot.data  )
+        map((event: ActivationEnd) =>  event.snapshot )
       );    
+  }
+
+  miga(res: any){
+
+    this.titulo =res.data.titulo;
+    this.rutas = res.data.rutas;   
+    if(this.rutas != undefined){
+      
+      this.rutas.forEach(ruta =>{
+        const parte = ruta.url.split('/');
+        var ultimo = parte[parte.length - 1];
+        if(ultimo == ':id'){          
+          parte[parte.length - 1] = res._urlSegment.segments[parte.length];
+          ruta.url = parte.join('/');
+        }
+      })
+
+    }
+    
+    // TODO: Poner el nombre de la app
+    document.title = `nombreApp - ${res.titulo}`;
+
   }
 
 }

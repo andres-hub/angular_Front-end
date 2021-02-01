@@ -6,7 +6,7 @@
         <div class="login-box card">
             <div class="card-body">
                 <form class="form-horizontal form-material" ngNativeValidate [formGroup]="loginForm" (submit)="login()" id="loginform">
-                    <h3 class="box-title m-b-20">Sign In</h3>
+                    <h3 class="box-title m-b-20">Iniciar sesión</h3>
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <input class="form-control" type="email" required="" placeholder="Email" formControlName="email"> </div>
@@ -19,12 +19,17 @@
                         <div class="col-md-12">
                             <div class="checkbox checkbox-info pull-left p-t-0">
                                 <input id="checkbox-signup" type="checkbox" class="filled-in chk-col-light-blue" formControlName="remember">
-                                <label for="checkbox-signup"> Remember me </label>
-                            </div> <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a> </div>
+                                <label for="checkbox-signup"> Recuerda me </label>
+                            </div> 
+                            <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right">
+                                <i class="fa fa-lock m-r-5"></i> 
+                                ¿Olvidaste la contraseña?                                
+                            </a> 
+                        </div>
                     </div>
                     <div class="form-group text-center">
                         <div class="col-xs-12 p-b-20">
-                            <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Log In</button>
+                            <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Iniciar sesión</button>
                         </div>
                     </div>
                     <div class="row">
@@ -34,11 +39,14 @@
                     </div>
                     <div class="form-group m-b-0">
                         <div class="col-sm-12 text-center">
-                            Don't have an account? <a routerLink="/register" class="text-info m-l-5"><b>Sign Up</b></a>
+                            ¿No tienes una cuenta?
+                             <a routerLink="/register" class="text-info m-l-5">
+                                <b>Regístrate</b>
+                            </a>
                         </div>
                     </div>
                 </form>
-                <form class="form-horizontal" id="recoverform" action="index.html">
+                <!-- <form class="form-horizontal" id="recoverform" action="index.html">
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <h3>Recover Password</h3>
@@ -54,7 +62,7 @@
                             <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
                         </div>
                     </div>
-                </form>
+                </form> -->
             </div>
         </div>
     </div>
