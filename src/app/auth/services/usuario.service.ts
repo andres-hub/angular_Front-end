@@ -11,7 +11,6 @@ import { CargarUsuarios } from '../../pages/interfaces/cargar-usuarios-interface
 
 import { Usuario } from '../models/usuario.model';
 import { ActualizarUsuarioForm } from '../../pages/interfaces/actualizar-usuario-form.interfase';
-import { Menu } from '../../pages/models/menu.model';
 
 const base_url = environment.base_url;
 declare const gapi: any;
@@ -23,6 +22,7 @@ export class UsuarioService {
 
   public auth2: any;
   public usuario: Usuario;
+  
 
   constructor(private http: HttpClient,
               private router: Router,
@@ -93,9 +93,10 @@ export class UsuarioService {
     localStorage.removeItem('menu');
     this.auth2.signOut().then(() => {
       this.ngZone.run(()=>{
-        this.router.navigateByUrl('/login');
+        
       });
     });
+    this.router.navigateByUrl('/login');
   }
 
   validarToken(): Observable<boolean>{

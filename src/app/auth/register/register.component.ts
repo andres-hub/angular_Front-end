@@ -13,11 +13,11 @@ import { UsuarioService } from '../services/usuario.service';
 export class RegisterComponent {
  
   public registerForm = this.fb.group({
-    nombre: ['Milena', [Validators.required]],
-    email: ['milena@gmail.com',[Validators.email]],
-    password: ['Milena123456', [Validators.required, Validators.minLength(5)]],
-    password2: ['Milena123456',[Validators.required, Validators.minLength(5)]],
-    terminos: [true, [Validators.required]]
+    nombre: ['', [Validators.required]],
+    email: ['',[Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(5)]],
+    password2: ['',[Validators.required, Validators.minLength(5)]],
+    terminos: [, [Validators.required]]
   });
 
 
