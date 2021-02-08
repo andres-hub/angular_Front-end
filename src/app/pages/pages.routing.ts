@@ -25,6 +25,8 @@ import { ListarRolesComponent } from './roles/listar-roles/listar-roles.componen
 import { RolComponent } from './roles/rol/rol.component';
 import { PermisosComponent } from './permisos/permisos.component';
 import { IngresosComponent } from './ingresos/ingresos.component';
+import { ListarIngresosComponent } from './ingresos/listar-ingresos/listar-ingresos.component';
+import { IngresoComponent } from './ingresos/ingreso/ingreso.component';
 
 const routes: Routes = [    
   {
@@ -102,7 +104,16 @@ const routes: Routes = [
       {path: 'perfil', component: PerfilComponent, canActivate:[AuthGuard], data: {titulo: 'Mi perfil'}},
 
       //negocio
-      {path:'ingresos', component: IngresosComponent, canActivate:[AuthGuard], data: {titulo: 'Ingresos'} }
+      {
+        path:'ingresos', 
+        component: IngresosComponent, 
+        canActivate:[AuthGuard], 
+        data: {titulo: 'Ingresos'},
+        children:[
+          {path: '', component: ListarIngresosComponent, canActivate:[AuthGuard, RutasGuard], data:{titulo: 'Ingresos'}},
+          {path: 'ingreso/:id', component: IngresoComponent, canActivate:[AuthGuard, RutasGuard], data: { titulo: 'Ingreso', rutas:[{alias: 'Ingresos', url:'ingresos'}] }}
+        ]
+      }
 
     ]
   },

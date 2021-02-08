@@ -30,7 +30,7 @@ export class RolComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedRoute.params.subscribe(({ id })=> this.cargarRol(id))
+    this.activatedRoute.params.subscribe(({ id })=> this.cargarRol(id));
 
     this.rolForm = this.fb.group({
       nombre: ['', Validators.required]
@@ -125,6 +125,7 @@ export class RolComponent implements OnInit {
 
       },
       (err)=>{
+        console.log(err);
         Swal.fire({
           title: '¡Error!',
           text: err.error.msg,

@@ -28,7 +28,7 @@ export class RutasGuard implements CanActivate {
 
         return this.permisosService.validarRuta(next.routeConfig.path)
          .pipe(                     
-           tap( acceso => { 
+           tap( acceso => {  
              if(!acceso){                        
                this.router.navigateByUrl('/');
              }

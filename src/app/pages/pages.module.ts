@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule} from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { NgxCurrencyModule } from "ngx-currency";
 
 //Modulos
 import { ComponentsModule } from '../components/components.module';
@@ -29,6 +30,8 @@ import { ListarRolesComponent } from './roles/listar-roles/listar-roles.componen
 import { RolComponent } from './roles/rol/rol.component';
 import { PermisosComponent } from './permisos/permisos.component';
 import { IngresosComponent } from './ingresos/ingresos.component';
+import { IngresoComponent } from './ingresos/ingreso/ingreso.component';
+import { ListarIngresosComponent } from './ingresos/listar-ingresos/listar-ingresos.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,9 @@ import { IngresosComponent } from './ingresos/ingresos.component';
     ListarRolesComponent,
     RolComponent,
     PermisosComponent,
-    IngresosComponent
+    IngresosComponent,
+    IngresoComponent,
+    ListarIngresosComponent
   ],
   exports:[
     DashboardComponent,
@@ -66,7 +71,8 @@ import { IngresosComponent } from './ingresos/ingresos.component';
     SharedModule,
     RouterModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxCurrencyModule
   ]
 })
 

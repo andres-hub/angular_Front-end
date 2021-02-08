@@ -6,7 +6,6 @@ import { environment } from '../../../environments/environment.prod';
 
 import { CargarParametros } from '../interfaces/cargar-parametros-interfase';
 import { Parametro } from '../models/parametros.model';
-import { ParametrosComponent } from '../parametros/parametros/parametros.component';
 
 const base_url = environment.base_url;
 

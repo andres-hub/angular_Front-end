@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~11.1.0",
     "@angular/router": "~11.1.0",
     "dropify": "^0.2.2",
+    "ngx-currency": "^2.5.2",
     "rxjs": "~6.5.5",
     "sweetalert2": "^10.10.4",
     "tslib": "^2.0.0",
