@@ -32,6 +32,9 @@ import { PermisosComponent } from './permisos/permisos.component';
 import { IngresosComponent } from './ingresos/ingresos.component';
 import { IngresoComponent } from './ingresos/ingreso/ingreso.component';
 import { ListarIngresosComponent } from './ingresos/listar-ingresos/listar-ingresos.component';
+import { GastosComponent } from './gastos/gastos.component';
+import { ListarGastosComponent } from './gastos/listar-gastos/listar-gastos.component';
+import { GastoComponent } from './gastos/gasto/gasto.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,10 @@ import { ListarIngresosComponent } from './ingresos/listar-ingresos/listar-ingre
     PermisosComponent,
     IngresosComponent,
     IngresoComponent,
-    ListarIngresosComponent
+    ListarIngresosComponent,
+    GastosComponent,
+    ListarGastosComponent,
+    GastoComponent
   ],
   exports:[
     DashboardComponent,

@@ -1,37 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingService } from '../../../components/services/loading.service';
-import { IngresosService } from '../../services/ingresos.service';
+import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
 
+import { LoadingService } from '../../../components/services/loading.service';
+import { GastosService } from '../../services/gastos.service';
+
 @Component({
-  selector: 'app-ingreso',
-  templateUrl: './ingreso.component.html',
+  selector: 'app-gasto',
+  templateUrl: './gasto.component.html',
   styles: [
   ]
 })
-export class IngresoComponent implements OnInit {
+export class GastoComponent implements OnInit {
 
+  public gastoForm: FormGroup;
+  public credito: boolean = false;
   private id: string;
-  public ingresoForm: FormGroup;
 
   constructor(
     public fb: FormBuilder,
     private location: Location,
     private activatedRoute: ActivatedRoute,
     public loadingService: LoadingService,
-    private ingresosService: IngresosService
+    private gastosService: GastosService
   ) { }
 
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe(({id}) => this.cargarIngreso(id));
 
-    this.ingresoForm = this.fb.group({
+    this.gastoForm = this.fb.group({
       nombre: ['', Validators.required],
+      tipo: ['', Validators.required],
+      numeroCuotas: [''],
+      efectivoAnual: [''],
       frecuencia: ['', Validators.required],
+      fechaPago: ['', Validators.required],
       valor: ['', Validators.required]      
     });
 
@@ -39,24 +45,27 @@ export class IngresoComponent implements OnInit {
 
   cargarIngreso(id: string){
 
-    this.loadingService.mostrarLoading();
-    
-    if(id === 'Nuevo'){
+    if(id == 'Nuevo'){
       this.loadingService.ocultarLoading();
       return;
     }
 
-    this.ingresosService.cargarIngreso(id)
-    .subscribe(ingreso => {
+    this.gastosService.cargarGasto(id)
+    .subscribe(gasto => {
 
-      if(!ingreso){
+      if(!gasto){
         return this.location.back();
       }
      
       this.id = id;
-      const { nombre, frecuencia, valor } = ingreso;     
 
-      this.ingresoForm.setValue({nombre, frecuencia, valor});
+      const {nombre, tipo, numeroCuotas, efectivoAnual, frecuencia, fechaPago, valor } = gasto;
+
+      console.log(fechaPago);
+   
+      const _fechaPago = fechaPago.split('T')[0];
+      
+      this.gastoForm.setValue({nombre, tipo, numeroCuotas, efectivoAnual, frecuencia, fechaPago: _fechaPago, valor});
       this.loadingService.ocultarLoading();
 
     },
@@ -71,6 +80,13 @@ export class IngresoComponent implements OnInit {
     }
     );
 
+  }
+
+  cambioTipo(){
+
+    const { tipo } = this.gastoForm.value;
+    
+    this.credito = (tipo == "Crédito")? true: false;
 
   }
 
@@ -80,16 +96,16 @@ export class IngresoComponent implements OnInit {
 
     if(this.id){
 
-      const data = { ...this.ingresoForm.value, _id: this.id };
+      const data = { ...this.gastoForm.value, _id: this.id };
 
-      this.ingresosService.actulizarIngreso(data)
+      this.gastosService.actulizarGasto(data)
       .subscribe((resp: any)=>{
 
         this.loadingService.ocultarLoading();
 
         Swal.fire({
           title: 'Actualización exitosa',
-          text: `${resp.ingreso.nombre}.`,
+          text: `${resp.gasto.nombre}.`,
           icon: 'success',
           confirmButtonText: 'Ok'
         }).then((result) =>{
@@ -108,23 +124,24 @@ export class IngresoComponent implements OnInit {
         return this.location.back();
       }
       );
+      return;
     }
 
-    const data = { ...this.ingresoForm.value };
-
-    this.ingresosService.crearIngreso(data).subscribe((resp: any)=>{
+    const data = { ...this.gastoForm.value };
+  
+    this.gastosService.crearGasto(data).subscribe((resp: any)=>{
 
       Swal.fire({
         title: 'Creado con éxito',
-        text: `${resp.ingreso.nombre}.`,
+        text: `${resp.gasto.nombre}.`,
         icon: 'success',
         confirmButtonText: 'Ok'
       }).then((result) =>{
         return this.location.back();
-      });   
+      });  
 
-    },(err)=>{
-      console.log(err);
+    },
+    (err)=>{
       Swal.fire({
         title: '¡Error!',
         text: err.error.msg,
@@ -132,7 +149,8 @@ export class IngresoComponent implements OnInit {
         confirmButtonText: 'Ok'
       });
       return this.location.back();
-    });
+    }
+    );
 
   }
 

@@ -27,6 +27,9 @@ import { PermisosComponent } from './permisos/permisos.component';
 import { IngresosComponent } from './ingresos/ingresos.component';
 import { ListarIngresosComponent } from './ingresos/listar-ingresos/listar-ingresos.component';
 import { IngresoComponent } from './ingresos/ingreso/ingreso.component';
+import { GastosComponent } from './gastos/gastos.component';
+import { ListarGastosComponent } from './gastos/listar-gastos/listar-gastos.component';
+import { GastoComponent } from './gastos/gasto/gasto.component';
 
 const routes: Routes = [    
   {
@@ -112,6 +115,16 @@ const routes: Routes = [
         children:[
           {path: '', component: ListarIngresosComponent, canActivate:[AuthGuard, RutasGuard], data:{titulo: 'Ingresos'}},
           {path: 'ingreso/:id', component: IngresoComponent, canActivate:[AuthGuard, RutasGuard], data: { titulo: 'Ingreso', rutas:[{alias: 'Ingresos', url:'ingresos'}] }}
+        ]
+      },
+      {
+        path:'gastos', 
+        component: GastosComponent, 
+        canActivate:[AuthGuard], 
+        data: {titulo: 'Gastos'},
+        children:[
+          {path: '', component: ListarGastosComponent, canActivate:[AuthGuard, RutasGuard], data:{titulo: 'Gastos'}},
+          {path: 'gasto/:id', component: GastoComponent, canActivate:[AuthGuard, RutasGuard], data: { titulo: 'Gasto', rutas:[{alias: 'Gastos', url:'gastos'}] }}
         ]
       }
 
