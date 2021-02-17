@@ -30,6 +30,7 @@ import { IngresoComponent } from './ingresos/ingreso/ingreso.component';
 import { GastosComponent } from './gastos/gastos.component';
 import { ListarGastosComponent } from './gastos/listar-gastos/listar-gastos.component';
 import { GastoComponent } from './gastos/gasto/gasto.component';
+import { PagosComponent } from './pagos/pagos.component';
 
 const routes: Routes = [    
   {
@@ -126,8 +127,13 @@ const routes: Routes = [
           {path: '', component: ListarGastosComponent, canActivate:[AuthGuard, RutasGuard], data:{titulo: 'Gastos'}},
           {path: 'gasto/:id', component: GastoComponent, canActivate:[AuthGuard, RutasGuard], data: { titulo: 'Gasto', rutas:[{alias: 'Gastos', url:'gastos'}] }}
         ]
+      },
+      {
+        path:'pagos', 
+        component: PagosComponent, 
+        canActivate:[AuthGuard], 
+        data: {titulo: 'Pagos'},
       }
-
     ]
   },
 ];

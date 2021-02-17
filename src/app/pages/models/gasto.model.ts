@@ -8,6 +8,6 @@ export class Gasto {
         public efectivoAnual: string,
         public frecuencia:string,   
         public fechaPago: string,
-        public valor:string
+        public valor:number
     ){}
 }

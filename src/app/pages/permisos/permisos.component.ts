@@ -9,7 +9,6 @@ import { PermisosService } from '../services/permisos.service';
 import { Menu } from '../models/menu.model';
 import { Permiso } from '../models/permisos.model';
 import { RolesService } from '../services/roles.service';
-import { UsuarioService } from '../../auth/services/usuario.service';
 
 @Component({
   selector: 'app-permisos',
@@ -29,8 +28,7 @@ export class PermisosComponent implements OnInit {
     private location:Location,
     public loadingService: LoadingService,    
     private permisosService: PermisosService,
-    private rolesService: RolesService,
-    private usuarioService: UsuarioService
+    private rolesService: RolesService
   ) { }
 
   ngOnInit(): void {

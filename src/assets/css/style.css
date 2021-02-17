@@ -4800,8 +4800,8 @@ File: scss
     font-size: 12px;
     display: inline-block; }
 
-.list-task .task-done span {
-  text-decoration: line-through; }
+/* .list-task .task-done span {
+  text-decoration: line-through; } */
 
 /*******************/
 /*Chat widget*/

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import {RouterModule} from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgxCurrencyModule } from "ngx-currency";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 //Modulos
 import { ComponentsModule } from '../components/components.module';
@@ -35,6 +37,7 @@ import { ListarIngresosComponent } from './ingresos/listar-ingresos/listar-ingre
 import { GastosComponent } from './gastos/gastos.component';
 import { ListarGastosComponent } from './gastos/listar-gastos/listar-gastos.component';
 import { GastoComponent } from './gastos/gasto/gasto.component';
+import { PagosComponent } from './pagos/pagos.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +65,8 @@ import { GastoComponent } from './gastos/gasto/gasto.component';
     ListarIngresosComponent,
     GastosComponent,
     ListarGastosComponent,
-    GastoComponent
+    GastoComponent,
+    PagosComponent
   ],
   exports:[
     DashboardComponent,
@@ -78,7 +82,9 @@ import { GastoComponent } from './gastos/gasto/gasto.component';
     RouterModule,
     ComponentsModule,
     ReactiveFormsModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ]
 })
 
