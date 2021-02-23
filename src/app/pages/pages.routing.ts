@@ -129,11 +129,12 @@ const routes: Routes = [
         ]
       },
       {
-        path:'pagos', 
+        path:'pagos/:id', 
         component: PagosComponent, 
         canActivate:[AuthGuard], 
         data: {titulo: 'Pagos'},
-      }
+        
+      },
     ]
   },
 ];

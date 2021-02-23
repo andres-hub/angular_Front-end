@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Movimiento } from '../models/movimientos.model';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
+
+import { Movimiento } from '../models/movimientos.model';
 
 const base_url = environment.base_url;
 
@@ -28,11 +29,29 @@ export class MovimientosService {
     }
   }
 
-  crearMovimiento(movimiento: Movimiento){
+  convertirMovimientos(movimientos: any[]): Movimiento[]{
 
-    const url = `${base_url}/movimientos`;
+    return movimientos.map(
+      movimiento => new Movimiento(
+         movimiento._id,
+         movimiento.nombre,
+         movimiento.pago,
+         movimiento.Tipo,
+         movimiento._id,
+         movimiento.valor,
+         movimiento.fecha
+        )
+      );
 
-    return this.http.post(url, movimiento, this.headers);
+  }
+
+  pagarMovimiento(movimiento: Movimiento){
+
+    const url = `${base_url}/movimientos/${movimiento._id}`;
+
+    return this.http.put(url, movimiento,this.headers).pipe(
+      map((resp:{ok:boolean, movimiento})=>{resp.movimiento})
+    );
     
   }
 
@@ -42,6 +61,21 @@ export class MovimientosService {
 
     return this.http.delete(url, this.headers).pipe(
       map((resp:{ok:boolean, movimiento})=>{resp.movimiento})
+    );
+
+  }
+
+  cargarMovimientos(quincena: string, tipo: 'gastos' | 'ingresos'){
+
+    const url = `${base_url}/movimientos/${tipo}/${quincena}`;
+
+    return this.http.get(url, this.headers).pipe(
+
+      map((resp: any)=>{
+        const gastos = this.convertirMovimientos(resp.movimientos);        
+        return gastos;
+      })
+
     );
 
   }

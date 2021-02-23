@@ -18,6 +18,7 @@ export class GastoComponent implements OnInit {
   public gastoForm: FormGroup;
   public credito: boolean = false;
   private id: string;
+  public mensual: Boolean = false;
 
   constructor(
     public fb: FormBuilder,
@@ -37,7 +38,7 @@ export class GastoComponent implements OnInit {
       numeroCuotas: [''],
       efectivoAnual: [''],
       frecuencia: ['', Validators.required],
-      fechaPago: ['', Validators.required],
+      quincena: ['', Validators.required],
       valor: ['', Validators.required]      
     });
 
@@ -59,13 +60,9 @@ export class GastoComponent implements OnInit {
      
       this.id = id;
 
-      const {nombre, tipo, numeroCuotas, efectivoAnual, frecuencia, fechaPago, valor } = gasto;
-
-      console.log(fechaPago);
-   
-      const _fechaPago = fechaPago.split('T')[0];
+      const {nombre, tipo, numeroCuotas, efectivoAnual, frecuencia, quincena, valor } = gasto;
       
-      this.gastoForm.setValue({nombre, tipo, numeroCuotas, efectivoAnual, frecuencia, fechaPago: _fechaPago, valor});
+      this.gastoForm.setValue({nombre, tipo, numeroCuotas, efectivoAnual, frecuencia, quincena, valor});
       this.loadingService.ocultarLoading();
 
     },
@@ -151,6 +148,14 @@ export class GastoComponent implements OnInit {
       return this.location.back();
     }
     );
+
+  }
+
+  cambioFrecuencia(){
+    
+    const {frecuencia} = this.gastoForm.value;
+    
+    this.mensual = (frecuencia == 'Mensual')? true: false; 
 
   }
 

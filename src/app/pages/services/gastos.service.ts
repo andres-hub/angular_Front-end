@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 import { Gasto } from '../models/gasto.model';
 import { map } from 'rxjs/operators';
@@ -39,7 +39,7 @@ export class GastosService {
         gasto.numeroCuotas,
         gasto.efectivoAnual,
         gasto.frecuencia,   
-        gasto.fechaPago.split('T')[0],
+        gasto.quincena,
         gasto.valor
         )
       );

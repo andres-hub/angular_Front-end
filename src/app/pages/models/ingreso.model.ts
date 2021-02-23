@@ -4,6 +4,7 @@ export class Ingreso {
         public _id:string,
         public nombre:string,
         public frecuencia:string,
-        public valor:  number
+        public valor:  number,
+        public quincena?: string,
     ){}
 }

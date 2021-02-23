@@ -14,10 +14,17 @@
                     </div>
                     <div class="form-group">
                         <label>Frecuencia</label>
-                        <select class="form-control" required formControlName="frecuencia">
+                        <select (change)="cambioTipo()" class="form-control" required formControlName="frecuencia">
                             <option value="Quincenal">Quincenal</option>
                             <option value="Mensual">Mensual</option>
                             <option value="Ocasional">Ocasional</option>
+                        </select>
+                    </div>                    
+                    <div *ngIf="mensual" class="form-group">
+                        <label>Quincena</label>
+                        <select class="form-control" required formControlName="quincena">
+                            <option value="primera">Primera quincena</option>
+                            <option value="segunda">Segunda quincena</option>
                         </select>
                     </div>
                     <div class="form-group">

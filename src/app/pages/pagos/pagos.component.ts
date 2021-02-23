@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 
-import { IngresosService } from '../services/ingresos.service';
 import { LoadingService } from '../../components/services/loading.service';
 
-import { Ingreso } from '../models/ingreso.model';
 import { Movimiento } from '../models/movimientos.model';
 import Swal from 'sweetalert2';
-import { GastosService } from '../services/gastos.service';
-import { Gasto } from '../models/gasto.model';
+
 import { MovimientosService } from '../services/movimientos.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-pagos',
@@ -19,85 +19,45 @@ import { MovimientosService } from '../services/movimientos.service';
 })
 export class PagosComponent implements OnInit {
 
+  private quincena: string;
   public totalIngresos: number = 0;
   public totalPagos: number = 0;
   public saldo: number = 0;
-  public ingresos: Movimiento[];
-  public gastos: Movimiento[];
+  public ingresos: Movimiento[] = [];
+  public gastos: Movimiento[] = [];
   public movimientos: Movimiento[];
 
   constructor(
     private toastr: ToastrService,
-    private ingresosService: IngresosService,
-    private gastosService: GastosService,
+    private activatedRoute: ActivatedRoute,
     public loadingService: LoadingService,
     private movimientosService: MovimientosService
   ) {}
 
   ngOnInit(): void {
-    this.cargarIngresos();
-    this.cargarGastos();
-  }
-
-  convertirIngresosToMovimientos(ingresos: Ingreso[]): Movimiento[]{
-
-    return ingresos.map(
-      ingreso => new Movimiento(
-         "",
-         ingreso.nombre,
-         false,
-         "ingreso",
-         ingreso._id,
-         ingreso.valor,
-         ""
-        )
-      );
-
-  }
-
-  convertirGastosToMovimientos(gastos: Gasto[]): Movimiento[]{
-
-    return gastos.map(
-      gasto => new Movimiento(
-         "",
-         gasto.nombre,
-         false,
-         "ingreso",
-         gasto._id,
-         gasto.valor,
-         ""
-        )
-      );
+    this.activatedRoute.params.subscribe(({id}) => {
+      
+      if (id != this.quincena) {
+        this.quincena = id;    
+        this.cargarIngresos();
+        this.cargarGastos();
+      }
+    });
 
   }
 
   cargarIngresos(){
     
+    this.totalIngresos = 0;
+    this.totalPagos = 0;
+    this.saldo = 0;
+
     this.loadingService.mostrarLoading();
 
-    this.ingresosService.cargarIngresos()
-    .subscribe((ingresos: Ingreso[])=>{
-      this.ingresos = this.convertirIngresosToMovimientos(ingresos);
-      this.loadingService.ocultarLoading();
-    },
-    (err)=>{
-      Swal.fire({
-        title: '¡Error!',
-        text: err.error.msg,
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      });
-    });
-
-  }
-
-  cargarGastos(){
-    
-    this.loadingService.mostrarLoading();
-
-    this.gastosService.cargarGastos()
-    .subscribe((gastos: Gasto[])=>{
-      this.gastos = this.convertirGastosToMovimientos(gastos);
+    this.movimientosService.cargarMovimientos(this.quincena, 'ingresos')
+    .subscribe((ingresos: Movimiento[])=>{
+      this.ingresos = ingresos;
+      this.sumIngresos();
       this.loadingService.ocultarLoading();
     },
     (err)=>{
@@ -107,26 +67,45 @@ export class PagosComponent implements OnInit {
         icon: 'error',
         confirmButtonText: 'Ok'
       });      
-    })
+    });
+
+  }
+
+  cargarGastos(){
+    
+    this.loadingService.mostrarLoading();
+
+    this.movimientosService.cargarMovimientos(this.quincena,'gastos')
+    .subscribe((gastos: Movimiento[])=>{
+      this.gastos = gastos
+      this.sumGastos();
+      this.loadingService.ocultarLoading();
+    },
+    (err)=>{
+      Swal.fire({
+        title: '¡Error!',
+        text: err.error.msg,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });      
+    });
 
   }
 
   cambioIngreso(ingreso: Movimiento , event){
+
     if(event.target.checked){
 
       ingreso.pago = true;
 
-      this.movimientosService.crearMovimiento(ingreso)
+      this.movimientosService.pagarMovimiento(ingreso)
       .subscribe((res: any)=>{
-        this.totalIngresos = this.totalIngresos + ingreso.valor;
-        this.saldo = this.totalIngresos - this.totalPagos; 
+        this.totalIngresos = Number(this.totalIngresos) + Number( ingreso.valor);
+        this.saldo = Number(this.totalIngresos) - Number(this.totalPagos); 
         ingreso._id = res.movimiento._id;
         this.toastr.success(ingreso.nombre, '¡ Cuenta agregada !', {
           timeOut: 1000,
         });
-
-        
-
       },
       (err)=>{
         Swal.fire({
@@ -143,8 +122,8 @@ export class PagosComponent implements OnInit {
       this.movimientosService.eliminarMovimiento(ingreso._id)
       .subscribe((resp)=>{
         ingreso.pago = false;
-        this.totalIngresos = this.totalIngresos - ingreso.valor;
-        this.saldo = this.totalIngresos - this.totalPagos; 
+        this.totalIngresos = Number(this.totalIngresos) - Number(ingreso.valor);
+        this.saldo = Number(this.totalIngresos) - Number(this.totalPagos); 
         this.toastr.warning( ingreso.nombre, '¡ Cuenta removida !', {
           timeOut: 1000,
         });
@@ -168,12 +147,11 @@ export class PagosComponent implements OnInit {
          
       gasto.pago = true;
 
-      this.movimientosService.crearMovimiento(gasto)
+      this.movimientosService.pagarMovimiento(gasto)
       .subscribe((res: any)=>{
 
-        this.totalPagos = this.totalPagos + gasto.valor; 
-        this.saldo = this.totalIngresos - this.totalPagos; 
-        gasto._id = res.movimiento._id;
+        this.totalPagos = Number(this.totalPagos) + Number(gasto.valor); 
+        this.saldo = Number(this.totalIngresos) - Number(this.totalPagos); 
         this.toastr.success(gasto.nombre, '¡ Pagado !', {
           timeOut: 1000,
         });
@@ -186,6 +164,7 @@ export class PagosComponent implements OnInit {
           icon: 'error',
           confirmButtonText: 'Ok'
         }); 
+        console.log(err);   
         gasto.pago = false;       
       });
     
@@ -194,8 +173,8 @@ export class PagosComponent implements OnInit {
       this.movimientosService.eliminarMovimiento(gasto._id)
       .subscribe((resp)=>{
         gasto.pago = false;        
-        this.totalPagos = this.totalPagos - gasto.valor;
-        this.saldo = this.totalIngresos - this.totalPagos;
+        this.totalPagos = Number(this.totalPagos) - Number(gasto.valor);
+        this.saldo = Number(this.totalIngresos) - Number(this.totalPagos);
         this.toastr.warning(gasto.nombre, '¡ Pagado cancelado !', {
           timeOut: 1000,
         });
@@ -206,11 +185,37 @@ export class PagosComponent implements OnInit {
           text: err.error.msg,
           icon: 'error',
           confirmButtonText: 'Ok'
-        });        
+        });  
+        console.log(err);      
       });
 
     }
 
   }
+
+  sumIngresos(){
+
+    this.ingresos.map(ingreso =>{
+      if(ingreso.pago){
+        this.totalIngresos = Number(this.totalIngresos) + Number( ingreso.valor);
+      }
+    });
+
+    this.saldo = Number(this.totalIngresos) - Number(this.totalPagos);
+
+  }  
+  
+  sumGastos(){
+    
+    this.gastos.map(gasto =>{
+      if(gasto.pago){
+        this.totalPagos = Number(this.totalPagos) + Number(gasto.valor);
+
+      }
+    });
+
+    this.saldo = Number(this.totalIngresos) - Number(this.totalPagos);
+
+  } 
 
 }

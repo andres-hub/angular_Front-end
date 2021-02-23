@@ -16,6 +16,7 @@ export class IngresoComponent implements OnInit {
 
   private id: string;
   public ingresoForm: FormGroup;
+  public mensual: Boolean = false;
 
   constructor(
     public fb: FormBuilder,
@@ -32,7 +33,8 @@ export class IngresoComponent implements OnInit {
     this.ingresoForm = this.fb.group({
       nombre: ['', Validators.required],
       frecuencia: ['', Validators.required],
-      valor: ['', Validators.required]      
+      quincena: ['', Validators.required],
+      valor: ['', Validators.required],     
     });
 
   }
@@ -54,9 +56,9 @@ export class IngresoComponent implements OnInit {
       }
      
       this.id = id;
-      const { nombre, frecuencia, valor } = ingreso;     
+      const { nombre, frecuencia, quincena, valor } = ingreso;     
 
-      this.ingresoForm.setValue({nombre, frecuencia, valor});
+      this.ingresoForm.setValue({nombre, frecuencia, quincena, valor});
       this.loadingService.ocultarLoading();
 
     },
@@ -71,6 +73,14 @@ export class IngresoComponent implements OnInit {
     }
     );
 
+
+  }
+
+  cambioTipo(){
+
+    const {frecuencia} = this.ingresoForm.value;
+    
+    this.mensual = (frecuencia == 'Mensual')? true: false; 
 
   }
 

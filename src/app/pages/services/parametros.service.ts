@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 import { CargarParametros } from '../interfaces/cargar-parametros-interfase';
 import { Parametro } from '../models/parametros.model';

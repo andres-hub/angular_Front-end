@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { Menu } from '../models/menu.model';
 import { Permiso } from '../models/permisos.model';
 import { of } from 'rxjs';
@@ -70,15 +70,15 @@ export class PermisosService {
     
     // if(ruta.length > 0){
       
-      const url = `${base_url}/permisos/ruta`;
-
-      return this.http.put(url, {ruta}, this.headers)
-      .pipe(
-        map((resp: any) =>{  
-          return true;
-        }),
-        catchError(error => of(false))        
-      );
+    const url = `${base_url}/permisos/ruta`;
+    console.log(ruta);
+    return this.http.put(url, {ruta}, this.headers)
+    .pipe(
+      map((resp: any) =>{ 
+        return true;
+      }),
+      catchError(error => of(false))        
+    );
 
    
 

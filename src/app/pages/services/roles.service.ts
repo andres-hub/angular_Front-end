@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 import { CargarRoles } from '../interfaces/cargar-roles-interfase';
 import { Rol } from '../models/rol.model';

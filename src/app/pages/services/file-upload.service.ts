@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 const base_url = environment.base_url;
 
