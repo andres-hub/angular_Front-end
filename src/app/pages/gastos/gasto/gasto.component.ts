@@ -64,6 +64,9 @@ export class GastoComponent implements OnInit {
       
       this.gastoForm.setValue({nombre, tipo, numeroCuotas, efectivoAnual, frecuencia, quincena, valor});
       this.loadingService.ocultarLoading();
+    
+      this.credito = (tipo == "Crédito")? true: false;
+      this.mensual = (frecuencia == 'Mensual')? true: false; 
 
     },
     (err)=>{
