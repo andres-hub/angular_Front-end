@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { Usuario } from '../../auth/models/usuario.model';
 import { UsuarioService } from '../../auth/services/usuario.service';
 import { FileUploadService } from '../services/file-upload.service';
+import { LoadingService } from '../../components/services/loading.service';
 
 declare var $: any; 
 
@@ -22,7 +23,8 @@ export class PerfilComponent implements OnInit {
   
   constructor( private  fb: FormBuilder,
                private usuarioService: UsuarioService,
-               private fileUploadService: FileUploadService 
+               private fileUploadService: FileUploadService,
+               private loadingService: LoadingService 
               ){
                  this.usuario = usuarioService.usuario;  
               }
@@ -48,12 +50,12 @@ export class PerfilComponent implements OnInit {
       email: [this.usuario.email, [Validators.required, Validators.email]]
     });
 
+    this.loadingService.ocultarLoading();
     
-
   }
 
   actualizarPerfil(){
-    console.log(this.perfilForm.value);
+    
     this.usuarioService.actualizarPerfil(this.perfilForm.value)
         .subscribe((resp: any)=>{
           const {email, nombre} = resp.usuario;

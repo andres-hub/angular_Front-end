@@ -2,6 +2,6 @@
 export const environment = {
   production: true,
   base_url: 'https://finanzas-back-end.herokuapp.com/api',
-  nombreApi: 'nombreApp'
+  nombreApi: 'Wallet App'
 
 };

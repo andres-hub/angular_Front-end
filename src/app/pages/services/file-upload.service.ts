@@ -29,7 +29,7 @@ export class FileUploadService {
       })
 
       const data = await resp.json();
-
+      
       if(data.ok){
 
         Swal.fire({

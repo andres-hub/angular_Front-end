@@ -60,7 +60,7 @@ export class BreadcrumdsComponent implements OnDestroy {
     }
     
     // TODO: Poner el nombre de la app
-    document.title = `nombreApp - ${res.titulo}`;
+    document.title = `${this.nombreAppi} - ${res.data.titulo}`;
 
   }
 
