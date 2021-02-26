@@ -87,7 +87,7 @@ export class IngresoComponent implements OnInit {
   guardar(){
 
     this.loadingService.mostrarLoading();
-
+    
     if(this.id){
 
       const data = { ...this.ingresoForm.value, _id: this.id };
@@ -118,6 +118,7 @@ export class IngresoComponent implements OnInit {
         return this.location.back();
       }
       );
+      return;
     }
 
     const data = { ...this.ingresoForm.value };
