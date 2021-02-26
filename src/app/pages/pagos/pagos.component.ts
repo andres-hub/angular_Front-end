@@ -102,8 +102,7 @@ export class PagosComponent implements OnInit {
       .subscribe((res: any)=>{
         this.totalIngresos = Number(this.totalIngresos) + Number( ingreso.valor);
         this.saldo = Number(this.totalIngresos) - Number(this.totalPagos); 
-        ingreso._id = res.movimiento._id;
-        this.toastr.success(ingreso.nombre, '¡ Cuenta agregada !', {
+        this.toastr.success(ingreso.nombre, '¡ Ingreso agregado !', {
           timeOut: 1000,
         });
       },
@@ -124,7 +123,7 @@ export class PagosComponent implements OnInit {
         ingreso.pago = false;
         this.totalIngresos = Number(this.totalIngresos) - Number(ingreso.valor);
         this.saldo = Number(this.totalIngresos) - Number(this.totalPagos); 
-        this.toastr.warning( ingreso.nombre, '¡ Cuenta removida !', {
+        this.toastr.warning( ingreso.nombre, '¡ Ingreso removido !', {
           timeOut: 1000,
         });
       },
@@ -175,7 +174,7 @@ export class PagosComponent implements OnInit {
         gasto.pago = false;        
         this.totalPagos = Number(this.totalPagos) - Number(gasto.valor);
         this.saldo = Number(this.totalIngresos) - Number(this.totalPagos);
-        this.toastr.warning(gasto.nombre, '¡ Pagado cancelado !', {
+        this.toastr.warning(gasto.nombre, '¡ Pago cancelado !', {
           timeOut: 1000,
         });
       },

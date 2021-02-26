@@ -131,6 +131,8 @@ export class GastoComponent implements OnInit {
   
     this.gastosService.crearGasto(data).subscribe((resp: any)=>{
 
+      this.loadingService.ocultarLoading();
+
       Swal.fire({
         title: 'Creado con éxito',
         text: `${resp.gasto.nombre}.`,

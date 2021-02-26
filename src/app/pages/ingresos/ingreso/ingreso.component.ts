@@ -124,6 +124,8 @@ export class IngresoComponent implements OnInit {
 
     this.ingresosService.crearIngreso(data).subscribe((resp: any)=>{
 
+      this.loadingService.ocultarLoading();
+
       Swal.fire({
         title: 'Creado con éxito',
         text: `${resp.ingreso.nombre}.`,
