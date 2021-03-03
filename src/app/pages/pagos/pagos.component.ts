@@ -22,6 +22,7 @@ export class PagosComponent implements OnInit {
   private quincena: string;
   public totalIngresos: number = 0;
   public totalPagos: number = 0;
+  public totalGastos: Number = 0;
   public saldo: number = 0;
   public ingresos: Movimiento[] = [];
   public gastos: Movimiento[] = [];
@@ -51,6 +52,7 @@ export class PagosComponent implements OnInit {
     this.totalIngresos = 0;
     this.totalPagos = 0;
     this.saldo = 0;
+    this.totalGastos = 0;
 
     this.loadingService.mostrarLoading();
 
@@ -211,6 +213,7 @@ export class PagosComponent implements OnInit {
         this.totalPagos = Number(this.totalPagos) + Number(gasto.valor);
 
       }
+      this.totalGastos =  Number(this.totalGastos) + Number(gasto.valor);
     });
 
     this.saldo = Number(this.totalIngresos) - Number(this.totalPagos);

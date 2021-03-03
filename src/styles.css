@@ -39,3 +39,7 @@
 .w500{
     height: 50px;
 }
+.fondo:hover {
+    background: #e9edf2;
+    cursor: pointer;
+  }

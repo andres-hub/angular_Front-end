@@ -2,15 +2,6 @@
 
 <div class="row" *ngIf="!loadingService.cargando">
 
-    <div class="col-md-12 col-lg-12 col-xlg-2">
-        <div class="card">
-            <div class="box bg-success text-center">
-                <h1 class="font-light text-white">{{totalIngresos | currency}}</h1>
-                <h6 class="text-white">Total Ingresos</h6>
-            </div>
-        </div>
-    </div>
-
     <!-- ============================================================== -->
     <!-- Ingresos -->
     <!-- ============================================================== -->
@@ -121,31 +112,54 @@
     <!-- End Gastos -->
     <!-- ============================================================== -->
 
-    <div class="col-lg-12 col-md-6">
+    <div class="col-lg-6 col-md-6">
         <div class="card">
             <div class="row">
                 <div class="col-12">
                     <div class="social-widget">
-                        <div class="soc-header box bg-success">
-                            <h1 class="font-light text-white">{{totalIngresos | currency}}</h1>
-                            <h6 class="text-white">Total Ingresos</h6>
-                        </div>
                         <div class="soc-content">
-                            <div class="col-6 b-r">
-                                <i class="ti-arrow-down text-danger"></i>
-                                <h3 class="font-medium">{{totalPagos | currency}}</h3>
-                                <h5 class="text-muted">Total, pagos</h5>
-                            </div>
-                            <div class="col-6">
+                            <div class="col-12 b-r soc-header box bg-success">
+                                <h1 class="font-light text-white">{{totalIngresos | currency}}</h1>
+                                <h5 class="text-white">Total Ingreso</h5>
+                            </div>                            
+                        </div>
+                        <div class="soc-content">                            
+                            <div class="col-12">
                                 <i class="ti-exchange-vertical text-success"></i>
                                 <h3 class="font-medium">{{saldo | currency}}</h3>
                                 <h5 class="text-muted">Saldo</h5>
-                            </div>
+                            </div>                                                    
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="col-lg-6 col-md-6">
+        <div class="card">
+            <div class="row">
+                <div class="col-12">
+                    <div class="social-widget">
+                        <div class="soc-content">
+                            <div class="col-12 soc-header box bg-danger">
+                                <h1 class="font-light text-white">{{totalGastos | currency}}</h1>
+                                <h5 class="text-white">Total Gastos</h5>
+                            </div>
+                        </div>
+                        <div class="soc-content">    
+                            <div class="col-12 b-r">
+                                <i class="ti-arrow-down text-danger"></i>
+                                <h3 class="font-medium">{{totalPagos | currency}}</h3>
+                                <h5 class="text-muted">Total, pagos</h5>
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     
 </div>
