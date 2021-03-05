@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { Modulo } from '../models/modulo.model';
 import { CargarModulos } from '../interfaces/cargar-modulos-interface';
 

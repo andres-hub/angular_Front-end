@@ -114,7 +114,8 @@ export class ModuloComponent implements OnInit {
       const data = { ...this.moduloForm.value};
 
       this.moduloService.crearModulo(data).subscribe((resp: any) =>{
-
+        
+        this.loadingService.ocultarLoading();
         Swal.fire({
           title: 'Creado con éxito',
           text: `${resp.modulo.nombre}, ${resp.modulo.icono}`,

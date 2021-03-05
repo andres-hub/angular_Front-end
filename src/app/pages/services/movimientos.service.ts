@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 
 import { Movimiento } from '../models/movimientos.model';
+import { CargarQuincenas } from '../interfaces/cargar-quincenas';
 
 const base_url = environment.base_url;
 
@@ -77,6 +78,22 @@ export class MovimientosService {
       })
 
     );
+
+  }
+
+  cargarQuincenas(desde: Number = 0){
+
+    const url = `${base_url}/movimientos/quincenas/?desde=${desde}`;
+
+    return this.http.get<CargarQuincenas>(url, this.headers).pipe(
+
+      map((resp: any)=>{
+
+        return resp._quincenas; 
+
+      })
+
+    )
 
   }
 

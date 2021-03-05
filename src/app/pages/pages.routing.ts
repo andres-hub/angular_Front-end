@@ -31,6 +31,9 @@ import { GastosComponent } from './gastos/gastos.component';
 import { ListarGastosComponent } from './gastos/listar-gastos/listar-gastos.component';
 import { GastoComponent } from './gastos/gasto/gasto.component';
 import { PagosComponent } from './pagos/pagos.component';
+import { MovimientosComponent } from './movimientos/movimientos.component';
+import { ListarMovimientosComponent } from './movimientos/listar-movimientos/listar-movimientos.component';
+import { MovimientoComponent } from './movimientos/movimiento/movimiento.component';
 
 const routes: Routes = [    
   {
@@ -132,8 +135,17 @@ const routes: Routes = [
         path:'pagos/:id', 
         component: PagosComponent, 
         canActivate:[AuthGuard], 
-        data: {titulo: 'Pagos'},
-        
+        data: {titulo: 'Pagos'},        
+      },
+      {
+        path:'movimientos', 
+        component: MovimientosComponent, 
+        canActivate:[AuthGuard], 
+        data: {titulo: 'Movimientos'},
+        children:[
+          {path: '', component: ListarMovimientosComponent, canActivate:[AuthGuard, RutasGuard], data:{titulo: 'Movimientos'}},
+          {path: 'movimiento/:mes/:quincena', component: MovimientoComponent, canActivate:[AuthGuard, RutasGuard], data: { titulo: 'Movimiento', rutas:[{alias: 'Movimientos', url:'movimientos'}] }}
+        ]
       },
     ]
   },

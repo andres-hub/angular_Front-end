@@ -38,6 +38,9 @@ import { GastosComponent } from './gastos/gastos.component';
 import { ListarGastosComponent } from './gastos/listar-gastos/listar-gastos.component';
 import { GastoComponent } from './gastos/gasto/gasto.component';
 import { PagosComponent } from './pagos/pagos.component';
+import { MovimientosComponent } from './movimientos/movimientos.component';
+import { ListarMovimientosComponent } from './movimientos/listar-movimientos/listar-movimientos.component';
+import { MovimientoComponent } from './movimientos/movimiento/movimiento.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,10 @@ import { PagosComponent } from './pagos/pagos.component';
     GastosComponent,
     ListarGastosComponent,
     GastoComponent,
-    PagosComponent
+    PagosComponent,
+    MovimientosComponent,
+    ListarMovimientosComponent,
+    MovimientoComponent
   ],
   exports:[
     DashboardComponent,
