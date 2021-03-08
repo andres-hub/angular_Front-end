@@ -17,12 +17,10 @@ export class LoadingService {
 
   ocultarLoading(){
     var widthBrowser = window.outerWidth;
-    console.log(widthBrowser);
     if( widthBrowser < 999 ){      
       this.body.setAttribute('class', 'fix-header card-no-border fix-sidebar mini-sidebar');
       var btnMenu = document.querySelector('#Menu');
-      if(btnMenu){
-        console.log(btnMenu);  
+      if(btnMenu){ 
         btnMenu.setAttribute('class', 'ti-menu');
       }
     }

@@ -1,4 +1,4 @@
-import { Routes, RouterModule, CanActivate } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import {NgModule} from '@angular/core';
 
 import { AuthGuard } from '../guards/auth.guard';
@@ -141,10 +141,10 @@ const routes: Routes = [
         path:'movimientos', 
         component: MovimientosComponent, 
         canActivate:[AuthGuard], 
-        data: {titulo: 'Movimientos'},
+        data: {titulo: 'Quincenas'},
         children:[
-          {path: '', component: ListarMovimientosComponent, canActivate:[AuthGuard, RutasGuard], data:{titulo: 'Movimientos'}},
-          {path: 'movimiento/:mes/:quincena', component: MovimientoComponent, canActivate:[AuthGuard, RutasGuard], data: { titulo: 'Movimiento', rutas:[{alias: 'Movimientos', url:'movimientos'}] }}
+          {path: '', component: ListarMovimientosComponent, canActivate:[AuthGuard, RutasGuard], data:{titulo: 'Quincenas'}},
+          {path: 'movimiento/:mes/:quincena', component: MovimientoComponent, canActivate:[AuthGuard, RutasGuard], data: { titulo: 'Movimientos', rutas:[{alias: 'Quincenas', url:'movimientos'}] }}
         ]
       },
     ]

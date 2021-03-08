@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingService } from '../../../components/services/loading.service';
+import Swal from 'sweetalert2';
+
+import { environment } from 'src/environments/environment'
 import { RolesService } from '../../services/roles.service';
 import { Rol } from '../../models/rol.model';
-import Swal from 'sweetalert2';
+import { LoadingService } from '../../../components/services/loading.service';
 
 @Component({
   selector: 'app-listar-roles',
@@ -12,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class ListarRolesComponent implements OnInit {
 
-
+  public nombreApp: string = environment.nombreApi;
   public totalRegistros: number = 0;
   public totalRegistrosTem: number = 0;
   public roles: Rol[]= [];

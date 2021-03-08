@@ -37,7 +37,7 @@ export class MovimientosService {
          movimiento._id,
          movimiento.nombre,
          movimiento.pago,
-         movimiento.Tipo,
+         movimiento.tipo,
          movimiento._id,
          movimiento.valor,
          movimiento.fecha
@@ -94,6 +94,21 @@ export class MovimientosService {
       })
 
     )
+
+  }
+
+  cargarMovimientosxQuincena(mes: string, quincena: string){
+
+    const url = `${base_url}/movimientos/getMovimientosXQuincena/${mes}/${quincena}`;
+
+    return this.http.get(url, this.headers).pipe(
+
+      map((resp: any)=>{
+        const movimientos = this.convertirMovimientos(resp.movimientos);
+        return movimientos;
+      })
+
+    );
 
   }
 

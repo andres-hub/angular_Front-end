@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { LoadingService } from '../../../components/services/loading.service';
@@ -31,6 +30,7 @@ export class ListarMovimientosComponent implements OnInit {
       this.quincenas = quincenas;
       this.loadingService.ocultarLoading();
     },(err)=>{
+      this.loadingService.ocultarLoading();
       Swal.fire({
         title: '¡Error!',
         text: err.error.msg,
