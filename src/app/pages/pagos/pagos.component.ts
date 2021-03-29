@@ -68,7 +68,8 @@ export class PagosComponent implements OnInit {
         text: err.error.msg,
         icon: 'error',
         confirmButtonText: 'Ok'
-      });      
+      });  
+      this.loadingService.ocultarLoading();    
     });
 
   }

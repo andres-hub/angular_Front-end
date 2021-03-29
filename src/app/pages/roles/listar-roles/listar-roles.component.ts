@@ -59,6 +59,7 @@ export class ListarRolesComponent implements OnInit {
         icon: 'error',
         confirmButtonText: 'Ok'
       }); 
+      this.loadingService.ocultarLoading();
     });
 
   }

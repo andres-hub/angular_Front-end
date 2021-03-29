@@ -81,9 +81,9 @@ export class MovimientosService {
 
   }
 
-  cargarQuincenas(desde: Number = 0){
+  cargarQuincenas(){
 
-    const url = `${base_url}/movimientos/quincenas/?desde=${desde}`;
+    const url = `${base_url}/movimientos/quincenas`;
 
     return this.http.get<CargarQuincenas>(url, this.headers).pipe(
 

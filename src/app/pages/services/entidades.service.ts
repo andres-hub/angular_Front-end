@@ -96,7 +96,7 @@ export class EntidadesService {
 
   actualizarEntidad(entidad: Entidad){
 
-    const url = `${base_url}/entidades/${entidad._id}`;
+    const url = `${base_url}/entidades/entidad/${entidad._id}`;
 
     return this.http.put(url, entidad,this.headers);
 

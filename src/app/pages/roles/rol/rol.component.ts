@@ -122,16 +122,16 @@ export class RolComponent implements OnInit {
         }).then((result) =>{
           return this.location.back();
         });      
-
+        this.loadingService.ocultarLoading();
       },
       (err)=>{
-        console.log(err);
         Swal.fire({
           title: '¡Error!',
           text: err.error.msg,
           icon: 'error',
           confirmButtonText: 'Ok'
-        }); 
+        });
+        this.loadingService.ocultarLoading(); 
       });
 
     }

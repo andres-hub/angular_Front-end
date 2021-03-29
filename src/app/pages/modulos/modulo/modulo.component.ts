@@ -106,6 +106,7 @@ export class ModuloComponent implements OnInit {
           icon: 'error',
           confirmButtonText: 'Ok'
         }); 
+        this.loadingService.ocultarLoading();
       });
 
 
@@ -133,6 +134,7 @@ export class ModuloComponent implements OnInit {
           icon: 'error',
           confirmButtonText: 'Ok'
         }); 
+        this.loadingService.ocultarLoading();
       });
 
     }

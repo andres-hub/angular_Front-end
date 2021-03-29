@@ -96,6 +96,7 @@ export class ListarParametrosComponent implements OnInit {
         icon: 'error',
         confirmButtonText: 'Ok'
       });
+      this.loadingService.ocultarLoading();
     });
 
   }

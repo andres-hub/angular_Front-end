@@ -112,6 +112,7 @@ export class UsersComponent implements OnInit {
             icon: 'error',
             confirmButtonText: 'Ok'
           }); 
+          this.loadingService.ocultarLoading();
         });
         
   }
@@ -150,7 +151,8 @@ export class UsersComponent implements OnInit {
                 text: err.error.msg,
                 icon: 'error',
                 confirmButtonText: 'Ok'
-              }); 
+              });
+              this.loadingService.ocultarLoading(); 
             });
       } 
     })
@@ -172,6 +174,8 @@ export class UsersComponent implements OnInit {
           icon: 'error',
           confirmButtonText: 'Ok'
         }); 
+        this.loadingService.ocultarLoading();
+        this.cargarUsuarios();
       });
   }
 

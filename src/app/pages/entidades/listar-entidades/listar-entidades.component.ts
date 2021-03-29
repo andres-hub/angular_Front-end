@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -32,6 +33,7 @@ export class ListarEntidadesComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     public loadingService:LoadingService,
+    private location: Location,
     private entidadesService: EntidadesService
   ) { }
 
@@ -94,9 +96,9 @@ export class ListarEntidadesComponent implements OnInit {
           icon: 'error',
           confirmButtonText: 'Ok'
         }); 
+        this.loadingService.ocultarLoading();
+        return this.location.back();
       });
-
-
   }
 
   buscar(termino: string){
@@ -126,6 +128,7 @@ export class ListarEntidadesComponent implements OnInit {
         icon: 'error',
         confirmButtonText: 'Ok'
       }); 
+      this.loadingService.ocultarLoading();
     });
 
   }
