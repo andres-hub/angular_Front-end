@@ -116,6 +116,20 @@ export class UsuarioService {
 
   }  
 
+  validarTokenCambioPass(token): Observable<boolean>{
+
+    return this.http.get(`${base_url}/login/ValidarCambioPass`, {
+      headers:{'x-token': token}
+    })
+    .pipe(
+      map((resp: any) =>{
+        return true;
+      }),
+      catchError(error => of(false))
+    );
+
+  } 
+
   crearUsuario(formData: RegisterForm ){
 
     return this.http.post(`${base_url}/usuarios`, formData)
@@ -207,6 +221,28 @@ export class UsuarioService {
     return this.http.put(`${base_url}/usuarios/role/${ussuario.uid}`, ussuario,{
       headers:{ 'x-token': this.token }
     })
+  }
+
+  solicitarCodigo(email: string){
+    
+    return this.http.post(`${base_url}/login/codigo`, {email});
+
+  }
+
+  cambiarPass(token: string, pass: string){
+    console.log(token);
+    return this.http.put(`${base_url}/login/cambiarPass`, {pass},
+    {headers:{ 'x-token': token }})
+    .pipe(
+      tap((resp: any) =>{
+        console.log(resp);
+        localStorage.setItem('token', resp.token);
+        localStorage.setItem('menu', resp.menu);
+      })
+    );
+
+    
+
   }
   
 }
